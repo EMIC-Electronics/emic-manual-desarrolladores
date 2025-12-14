@@ -1335,24 +1335,33 @@ VALIDACIÓN (Parte 3):
 
 ## 🚀 ESTRATEGIA DE IMPLEMENTACIÓN
 
+### 📁 UBICACIÓN DEL DESARROLLO
+
+> **IMPORTANTE:** La nueva versión del manual se está escribiendo en:
+> ```
+> Manual_para_desarrolladores/Manual_Desarrollo_EMIC_V2/
+> ```
+> Esta carpeta contiene los capítulos reescritos según este plan.
+
 ### Fase 1: Preparación (Ya hecha)
 - [x] Copiar archivos a Manual_para_desarrolladores/
 - [x] Crear este plan maestro
+- [x] Crear estructura de carpetas en Manual_Desarrollo_EMIC_V2/
 
 ### Fase 2: Mantener lo que funciona
 - [ ] Validar que Secciones 1 y 2 (Caps 00-15) son adecuados para desarrolladores
 - [ ] Si es necesario, hacer ajustes menores
 
-### Fase 3: Actualizar Sección 3 (EMIC-Codify)
-- [ ] Reescribir Cap 16: Fundamentos Codify para Desarrollo
-- [ ] Reescribir Cap 17: Comandos Gestión Archivos
-- [ ] Reescribir Cap 18: Sistema Macros
-- [ ] Reescribir Cap 19: Control Flujo
-- [ ] Crear nuevo Cap 20: Etiquetado Recursos Tags
+### Fase 3: Actualizar Sección 3 (EMIC-Codify) ✅ **COMPLETADA**
+- [x] Reescribir Cap 16: Fundamentos Codify para Desarrollo ✅ **COMPLETADO**
+- [x] Reescribir Cap 17: Comandos Gestión Archivos ✅ **COMPLETADO**
+- [x] Reescribir Cap 18: Sistema Macros y Sustitución ✅ **COMPLETADO**
+- [x] Reescribir Cap 19: Control de Flujo y Condicionales ✅ **COMPLETADO**
+- [x] Crear nuevo Cap 20: Etiquetado Recursos Tags ✅ **COMPLETADO**
 
-### Fase 4: Reformular Sección 4 (Desarrollo)
-- [ ] Reescribir Cap 21: Desarrollo API Paso a Paso
-- [ ] Reescribir Cap 22: Desarrollo Driver
+### Fase 4: Reformular Sección 4 (Desarrollo) ← **EN PROGRESO**
+- [x] Reescribir Cap 21: Desarrollo API Paso a Paso ✅ **COMPLETADO**
+- [x] Reescribir Cap 22: Desarrollo Driver ✅ **COMPLETADO**
 - [ ] Reescribir Cap 23: Desarrollo Módulo Completo
 - [ ] Crear nuevo Cap 24: Proceso Generación Generate
 - [ ] Reescribir Cap 25: Configuración Dinámica
