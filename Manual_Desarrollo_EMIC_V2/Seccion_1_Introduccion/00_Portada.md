@@ -94,9 +94,9 @@ Este manual está organizado en **7 secciones** con **38 capítulos**:
 ### **Sección 4: Desarrollo de Componentes SDK** 🛠️
 - [Cap 21 - Desarrollo de una API EMIC - Paso a Paso](../Seccion_4_Desarrollo/21_Desarrollo_API_Paso_a_Paso.md)
 - [Cap 22 - Desarrollo de un Driver EMIC](../Seccion_4_Desarrollo/22_Desarrollo_Driver.md)
-- [Cap 23 - Desarrollo de un Módulo EMIC Completo](../Seccion_4_Desarrollo/23_Desarrollo_Modulo_Completo.md)
-- [Cap 24 - Proceso de Generación (generate.emic) Profundo](../Seccion_4_Desarrollo/24_Proceso_Generacion_Generate.md)
-- [Cap 25 - Configuración Dinámica y Parametrización](../Seccion_4_Desarrollo/25_Configuracion_Dinamica_Modulos.md)
+- [Cap 23 - Proceso de Generación (EMIC Generate)](../Seccion_4_Desarrollo/23_Proceso_Generacion_Generate.md)
+- [Cap 24 - Proceso de Deploy - Instanciación de Módulo](../Seccion_4_Desarrollo/24_Proceso_Deploy_Instanciacion_Modulo.md)
+- [Cap 25 - Desarrollo de un Módulo EMIC Completo](../Seccion_4_Desarrollo/25_Desarrollo_Modulo_Completo.md)
 - [Cap 26 - Creación de Categorías y Organización del SDK](../Seccion_4_Desarrollo/26_Categorias_Organizacion_SDK.md)
 
 ### **Sección 5: Casos Prácticos de Desarrollo-Integración** 🎓
@@ -139,9 +139,10 @@ Tiempo estimado: 2-3 semanas
 2. ➡️ **Estructura SDK** (Caps 05-07)
 3. ➡️ **EMIC-Codify Completo** (Caps 16-20)
 4. ➡️ **Desarrollo API + Driver** (Caps 21-22)
-5. ➡️ **Desarrollo Módulo** (Cap 23)
-6. ➡️ **Casos Prácticos** (Caps 27-29)
-7. ➡️ **Testing** (Cap 32)
+5. ➡️ **Procesos Generate y Deploy** (Caps 23-24)
+6. ➡️ **Desarrollo Módulo** (Cap 25)
+7. ➡️ **Casos Prácticos** (Caps 27-29)
+8. ➡️ **Testing** (Cap 32)
 
 ### 🔴 **Ruta Avanzada** (Dominas el desarrollo embebido)
 Tiempo estimado: 1-2 semanas
