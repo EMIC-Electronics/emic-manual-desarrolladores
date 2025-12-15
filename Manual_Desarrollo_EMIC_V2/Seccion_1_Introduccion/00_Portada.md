@@ -97,7 +97,7 @@ Este manual está organizado en **7 secciones** con **38 capítulos**:
 - [Cap 23 - Proceso de Generación (EMIC Generate)](../Seccion_4_Desarrollo/23_Proceso_Generacion_Generate.md)
 - [Cap 24 - Proceso de Deploy - Instanciación de Módulo](../Seccion_4_Desarrollo/24_Proceso_Deploy_Instanciacion_Modulo.md)
 - [Cap 25 - Desarrollo de un Módulo EMIC Completo](../Seccion_4_Desarrollo/25_Desarrollo_Modulo_Completo.md)
-- [Cap 26 - Creación de Categorías y Organización del SDK](../Seccion_4_Desarrollo/26_Categorias_Organizacion_SDK.md)
+- [Cap 26 - Plugins del Editor](../Seccion_4_Desarrollo/26_Plugins_Editor.md)
 
 ### **Sección 5: Casos Prácticos de Desarrollo-Integración** 🎓
 - [Cap 27 - Caso Práctico - API de LEDs Desde Cero](../Seccion_5_Casos_Practicos/27_Caso_API_LEDs_Completo.md)

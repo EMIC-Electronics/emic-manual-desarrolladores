@@ -11,6 +11,13 @@ A diferencia de las APIs (que exponen funcionalidades) y los drivers (que contro
 - Proporciona una **interfaz visual** para el Editor EMIC
 - Genera un **proyecto compilable** completo para MPLAB X
 
+### Relación con Otros Capítulos
+
+Este capítulo asume conocimiento de:
+- **Capítulo 23**: Proceso de Generación (EMIC Generate) - explica cómo funciona `generate.emic`
+- **Capítulo 24**: Proceso de Deploy e Instanciación - explica cómo funciona `deploy.emic` y EMIC-Discovery
+- **Capítulo 26**: Plugins del Editor - explica el sistema de plugins
+
 ## 25.2 Estructura de Carpetas de un Módulo
 
 Un módulo EMIC sigue una estructura de carpetas estándar:
@@ -21,8 +28,8 @@ _modules/
     └── NombreModulo/
         ├── m_description.json      # Metadatos del módulo
         └── System/
-            ├── deploy.emic         # Script de deploy
-            ├── generate.emic       # Script de generación
+            ├── deploy.emic         # Script de deploy (ver cap. 24)
+            ├── generate.emic       # Script de generación (ver cap. 23)
             └── module.webp         # Imagen del módulo
 ```
 
@@ -109,34 +116,31 @@ El archivo `m_description.json` contiene la información descriptiva del módulo
 
 ## 25.4 Script de Generación: generate.emic
 
-El archivo `generate.emic` es el script principal que orquesta la generación de código C para el módulo.
+El archivo `generate.emic` es el script principal que orquesta la generación de código C para el módulo. Para una explicación detallada del proceso de generación, consulte el **Capítulo 23**.
 
-### Estructura Estándar
+### Resumen de la Estructura
 
 ```c
 EMIC:setOutput(TARGET:generate.txt)
 
-    //-------------- Hardware Config ---------------------
+    // 1. Configuración de hardware (PCB)
     EMIC:setInput(DEV:_pcb/pcb.emic,pcb=NOMBRE_PCB)
 
-    //------------------- Process EMIC-Generate files result ----------------
+    // 2. Procesar funciones/eventos usados por el usuario
     EMIC:setInput(SYS:usedFunction.emic)
     EMIC:setInput(SYS:usedEvent.emic)
 
-    //------------------- APIs -----------------------
-    // Aquí se incluyen las APIs del módulo
+    // 3. Cargar APIs del módulo
+    EMIC:setInput(DEV:_api/Categoria/api.emic,parametros...)
 
-    //-------------------- main  -----------------------
+    // 4. Generar main.c
     EMIC:setInput(DEV:_main/baremetal/main.emic)
 
-    //------------------- Copy EMIC-Generate files result ----------------
-    EMIC:copy(SYS:inc/userFncFile.h > TARGET:inc/userFncFile.h)
+    // 5. Copiar código del usuario
     EMIC:copy(SYS:userFncFile.c > TARGET:userFncFile.c)
-
-    //------------------- Set userFncFile.c as a compiler module ----------------
     EMIC:define(c_modules.userFncFile,userFncFile)
 
-    //------------------- Add all compiler modules to the project ----------------
+    // 6. Generar proyecto MPLAB X
     EMIC:copy(DEV:_templates/projects/mplabx > TARGET:)
 
 EMIC:restoreOutput
@@ -144,97 +148,53 @@ EMIC:restoreOutput
 
 ### Ejemplo Real: Módulo HRD_2Relays
 
-Archivo: `_modules/Wired_Control/HRD_2Relays/System/generate.emic`
-
 ```c
 EMIC:setOutput(TARGET:generate.txt)
 
-    //-------------- Hardware Config ---------------------
     EMIC:setInput(DEV:_pcb/pcb.emic,pcb=HRD_USB V1.1)
 
-    //------------------- Process EMIC-Generate files result ----------------
     EMIC:setInput(SYS:usedFunction.emic)
     EMIC:setInput(SYS:usedEvent.emic)
 
-    //------------------- APIs -----------------------
+    // APIs disponibles en este módulo
     EMIC:setInput(DEV:_api/Indicators/LEDs/led.emic,name=led,pin=Led1)
-
     EMIC:setInput(DEV:_api/Timers/timer_api.emic,name=1)
     EMIC:setInput(DEV:_api/Wired_Communication/USB/USB_API.emic,driver=MCP2200,port=1,BufferSize=512,baud=9600,frameLf=\n,name=MCP2200)
     EMIC:setInput(DEV:_api/Wired_Communication/EMICBus/EMICBus.emic,port=2,frameID=0)
     EMIC:setInput(DEV:_api/Actuators/Relay/relay.emic,name=ON,pin=RelayON)
     EMIC:setInput(DEV:_api/Actuators/Relay/relay.emic,name=DIR,pin=RelayDIR)
 
-    //-------------------- main  -----------------------
     EMIC:setInput(DEV:_main/baremetal/main.emic)
 
-    //------------------- Copy EMIC-Generate files result ----------------
     EMIC:copy(SYS:inc/userFncFile.h > TARGET:inc/userFncFile.h)
     EMIC:copy(SYS:userFncFile.c > TARGET:userFncFile.c)
-
-    //------------------- Set userFncFile.c as a compiler module ----------------
     EMIC:define(c_modules.userFncFile,userFncFile)
 
-    //------------------- Add all compiler modules to the project ----------------
     EMIC:copy(DEV:_templates/projects/mplabx > TARGET:)
 
 EMIC:restoreOutput
 ```
 
-### Secciones del generate.emic
+> **Nota**: Para entender cómo funciona el sistema de grupos (`inits.*`, `polls.*`, `c_modules.*`), la expansión de macros, y el orden de ejecución, consulte el **Capítulo 23: Proceso de Generación**.
 
-#### 1. Hardware Config
-```c
-EMIC:setInput(DEV:_pcb/pcb.emic,pcb=HRD_USB V1.1)
-```
-Carga la configuración del PCB específico, que incluye:
-- Configuración del microcontrolador (pragma config)
-- Definición de frecuencias (FOSC, FCY)
-- Asignación de pines
+### Importancia del generate.emic para el Editor
 
-#### 2. Process EMIC-Generate Files
-```c
-EMIC:setInput(SYS:usedFunction.emic)
-EMIC:setInput(SYS:usedEvent.emic)
-```
-Procesa los archivos generados por el Editor EMIC que contienen las funciones y eventos que el usuario utilizó en su programa visual.
+El archivo `generate.emic` tiene un rol dual:
 
-#### 3. APIs
-```c
-EMIC:setInput(DEV:_api/Indicators/LEDs/led.emic,name=led,pin=Led1)
-EMIC:setInput(DEV:_api/Actuators/Relay/relay.emic,name=ON,pin=RelayON)
-```
-Incluye las APIs disponibles en el módulo, cada una con sus parámetros de configuración.
+1. **Durante EMIC-Generate**: Genera el código C compilable
+2. **Durante EMIC-Discovery**: Se ejecuta en modo "Discovery" para extraer las funciones y eventos de las APIs (basado en tags DOXYGEN) y generar automáticamente el archivo `Resources` del Editor
 
-#### 4. Main
-```c
-EMIC:setInput(DEV:_main/baremetal/main.emic)
-```
-Incluye el template del main que integra todos los componentes.
-
-#### 5. User Code
-```c
-EMIC:copy(SYS:inc/userFncFile.h > TARGET:inc/userFncFile.h)
-EMIC:copy(SYS:userFncFile.c > TARGET:userFncFile.c)
-EMIC:define(c_modules.userFncFile,userFncFile)
-```
-Copia el código del usuario (generado desde el Editor visual) al proyecto.
-
-#### 6. Project Template
-```c
-EMIC:copy(DEV:_templates/projects/mplabx > TARGET:)
-```
-Copia la estructura del proyecto MPLAB X.
+Por esta razón, las APIs que se incluyen en `generate.emic` determinan qué funciones y eventos estarán disponibles para el usuario en el Editor EMIC. Ver **Capítulo 24** para más detalles sobre EMIC-Discovery.
 
 ## 25.5 Script de Deploy: deploy.emic
 
-El archivo `deploy.emic` se ejecuta cuando el usuario crea una nueva instancia del módulo en el Editor EMIC. Prepara los archivos iniciales del proyecto.
+El archivo `deploy.emic` se ejecuta cuando el usuario crea una nueva instancia del módulo en el Editor EMIC. Para una explicación detallada del proceso de deploy, consulte el **Capítulo 24**.
 
 ### Estructura Básica
 
 ```c
 EMIC:setOutput(TARGET:deploy.txt)
-    //------------------- Copy generate files ----------------
+    // Crear archivos de usuario vacíos
     EMIC:setOutput(SYS:inc/userFncFile.h)
     // file: userFncFile.h
     EMIC:restoreOutput
@@ -243,8 +203,10 @@ EMIC:setOutput(TARGET:deploy.txt)
     // file: userFncFile.c
     EMIC:restoreOutput
 
+    // Copiar plugins del Editor (ver capítulo 26)
     EMIC:copy(DEV:_templates/plugins/sidebar-tabs > SYS:EMIC-TABS)
 
+    // Generar ID único para EMIC Bus
     EMIC:setOutput(TARGET:inc/myId.h)
     #define _I2C_ID .{module.Id}.
     EMIC:restoreOutput
@@ -255,63 +217,34 @@ EMIC:restoreOutput
 ### Funciones del deploy.emic
 
 1. **Crear archivos de usuario vacíos**: Prepara `userFncFile.h` y `userFncFile.c`
-2. **Copiar templates de pestañas**: Configura las pestañas del Editor
+2. **Copiar plugins del Editor**: Los plugins base (Code, Data, Functions, User) para la interfaz del Editor
 3. **Generar ID único**: Crea un identificador para el módulo en la red EMIC Bus
 
-## 25.6 Archivos Generados por el Editor
+> **Importante**: El archivo `Resources` (que contiene las funciones y eventos del módulo) **NO** se copia en el deploy. Se genera automáticamente por el proceso **EMIC-Discovery** después del deploy, basándose en los tags DOXYGEN de las APIs incluidas en `generate.emic`. Ver **Capítulo 24** para más detalles.
 
-Cuando el usuario programa visualmente en el Editor EMIC, se generan automáticamente dos archivos importantes:
-
-### usedFunction.emic
-
-Contiene las definiciones de las funciones que el usuario utilizó:
-
-```c
-// Functions:
-EMIC:define(usedFunction.LEDs_led_blink,LEDs_led_blink)
-EMIC:define(usedFunction.pI2C,pI2C)
-EMIC:define(usedFunction.pUSB,pUSB)
-```
-
-### usedEvent.emic
-
-Contiene las definiciones de los eventos que el usuario implementó:
-
-```c
-// Events:
-EMIC:define(usedEvent.eI2C,eI2C)
-EMIC:define(usedEvent.eUSB,eUSB)
-EMIC:define(usedEvent.SystemConfig,SystemConfig)
-```
-
-### Propósito
-
-Estos archivos permiten que el sistema incluya **solo el código necesario** para las funciones y eventos que realmente se usan, optimizando el tamaño del firmware final.
-
-## 25.7 Configuración de Hardware: PCB
+## 25.6 Configuración de Hardware: PCB
 
 Cada módulo referencia un archivo PCB que define la configuración específica del hardware.
 
-### Archivo pcb.emic
+### Estructura del Archivo PCB
+
+Los archivos PCB se ubican en `_pcb/inc/` y generan tres headers principales:
+
+| Archivo Generado | Contenido |
+|------------------|-----------|
+| `systemConfig.h` | Pragma config del microcontrolador |
+| `system.h` | Definiciones de frecuencia (FOSC, FCY) |
+| `pins.h` | Asignación de pines físicos |
+
+### Ejemplo: Header PCB HRD_USB V1.1
 
 ```c
-EMIC:copy(inc/.{pcb}..h > TARGET:inc/.{pcb}..h)
-```
+// Archivo: _pcb/inc/HRD_USB V1.1.h
 
-Este archivo simplemente copia el header del PCB correspondiente según el parámetro `pcb`.
-
-### Ejemplo de Header PCB
-
-Archivo: `_pcb/inc/HRD_USB V1.1.h`
-
-```c
 EMIC:setOutput(TARGET:inc/systemConfig.h)
 #pragma config POSCMOD = NONE       // Primary Oscillator Select
 #pragma config I2C1SEL = PRI        // I2C1 Pin Location Select
-#pragma config OSCIOFNC = ON        // Use RA3 as I/O
-#pragma config FCKSM = CSDCMD       // Clock Switching disabled
 #pragma config FNOSC = FRCPLL       // Fast RC Oscillator with PLL
-#pragma config WDTPS = PS32768      // Watchdog Timer Postscaler
 #pragma config FWDTEN = OFF         // Watchdog Timer disabled
 #pragma config JTAGEN = OFF         // JTAG disabled
 EMIC:restoreOutput
@@ -327,237 +260,24 @@ EMIC:setOutput(TARGET:inc/pins.h)
 EMIC:define(system.ucName,pic24FJ64GA002)
 EMIC:define(system.i2c,2)
 
-EMIC:setInput(DEV:_hal/pins/setPin.emic,pin=B14,name=MCP2200_RST)
 EMIC:setInput(DEV:_hal/pins/setPin.emic,pin=B6,name=Led1)
 EMIC:setInput(DEV:_hal/pins/setPin.emic,pin=B10,name=MCP2200_TX)
 EMIC:setInput(DEV:_hal/pins/setPin.emic,pin=B15,name=MCP2200_RX)
-
 EMIC:restoreOutput
 ```
 
-### Elementos del PCB
+### Macros del Sistema Definidas por PCB
 
-| Elemento | Descripción |
-|----------|-------------|
-| `systemConfig.h` | Pragma config del microcontrolador |
-| `system.h` | Definiciones de frecuencia |
-| `pins.h` | Asignación de pines |
-| `system.ucName` | Nombre del microcontrolador (para HAL) |
+| Macro | Propósito |
+|-------|-----------|
+| `system.ucName` | Nombre del microcontrolador (para HAL y proyecto MPLAB) |
 | `system.i2c` | Puerto I2C a usar |
 
-## 25.8 Pestañas del Editor: emic-tabs
-
-Las pestañas definen la interfaz visual del módulo en el Editor EMIC.
-
-### Resources.html
-
-Define las funciones y eventos disponibles para el usuario:
-
-```html
-<emic-driver-container name="LEDs" icon="cable">
-    <emic-program-function
-        driver="LEDs"
-        name="LEDs_led_state"
-        type="uint8_t"
-        brief="Change the state of the led"
-        alias="led.state"
-        draggable="true">
-        <emic-function-parameter
-            name="state"
-            type="uint8_t"
-            brief="1-on 0-off 2-toggle">
-        </emic-function-parameter>
-    </emic-program-function>
-
-    <emic-program-function
-        driver="LEDs"
-        name="LEDs_led_blink"
-        type="void"
-        brief="blink the led"
-        alias="led.blink"
-        draggable="true"
-        class="subroutine">
-        <emic-function-parameter name="timeOn" type="uint16_t" brief="time on"></emic-function-parameter>
-        <emic-function-parameter name="period" type="uint16_t" brief="period"></emic-function-parameter>
-        <emic-function-parameter name="times" type="uint16_t" brief="cycles"></emic-function-parameter>
-    </emic-program-function>
-</emic-driver-container>
-
-<emic-driver-container name="RELAY" icon="cable">
-    <emic-program-function
-        driver="RELAY"
-        name="relay_ON"
-        type="void"
-        brief="Modifies Relay ON status"
-        alias="setStatusON"
-        draggable="true">
-        <emic-function-parameter name="stateRelay" type="uint8_t" brief="0-off, 1-on, 2-toggle"></emic-function-parameter>
-    </emic-program-function>
-</emic-driver-container>
-
-<emic-driver-container name="SYSTEM" icon="cable">
-    <emic-program-event
-        driver="SYSTEM"
-        name="onReset"
-        type="void"
-        brief="When the module is ready"
-        alias="onReset"
-        draggable="true"
-        droppable="">
-    </emic-program-event>
-
-    <emic-program-event
-        driver="SYSTEM"
-        name="SystemConfig"
-        type="void"
-        brief="Before initializing drivers"
-        alias="SystemConfig"
-        draggable="true"
-        droppable="">
-    </emic-program-event>
-</emic-driver-container>
-```
-
-### Code.html
-
-Define los bloques de control de flujo:
-
-```html
-<emic-flow-container name="Control de Flujo" icon="fork_right">
-    <emic-flow-if
-        name="conditional_if"
-        alias="if...else"
-        brief="Estructura condicional if-else"
-        draggable="true">
-    </emic-flow-if>
-
-    <emic-flow-switch
-        name="conditional_switch"
-        alias="switch"
-        brief="Estructura condicional switch-case"
-        draggable="true">
-    </emic-flow-switch>
-</emic-flow-container>
-
-<emic-math-container name="Comparación" icon="calculate">
-    <emic-math-equal name="equal" alias="==" brief="Igualdad" draggable="true"></emic-math-equal>
-    <emic-math-notequal name="notequal" alias="!=" brief="Diferencia" draggable="true"></emic-math-notequal>
-    <emic-math-greater name="greater" alias=">" brief="Mayor que" draggable="true"></emic-math-greater>
-    <emic-math-less name="less" alias="<" brief="Menor que" draggable="true"></emic-math-less>
-</emic-math-container>
-```
-
-### Data.html
-
-Panel de variables del usuario:
-
-```html
-<emic-variables-panel></emic-variables-panel>
-```
-
-## 25.9 Código del Usuario: userFncFile
-
-El código que el usuario crea en el Editor visual se traduce a C en `userFncFile.c`.
-
-### Ejemplo de userFncFile.c
-
-```c
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
-#include <stdlib.h>
-#include "inc/userFncFile.h"
-#include "inc/.{main_includes.*}..h"
-
-void SystemConfig()
-{
-    LEDs_led_blink(100, 200, 5);
-}
-
-void eI2C(char* tag, const streamIn_t* const msg)
-{
-    LEDs_led_blink(100, 101, 1);
-    pUSB("$s\t$r", tag, msg);
-}
-
-void eUSB(char* tag, const streamIn_t* const msg)
-{
-    LEDs_led_blink(50, 100, 2);
-    pI2C("$s\t$r", tag, msg);
-}
-```
-
-Este código implementa:
-- `SystemConfig()`: Se ejecuta antes de inicializar drivers
-- `eI2C()`: Evento cuando llega un mensaje por EMIC Bus
-- `eUSB()`: Evento cuando llega un mensaje por USB
-
-## 25.10 Flujo de Generación Completo
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    EDITOR EMIC                               │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │
-│  │  Resources  │  │    Code     │  │    Data     │          │
-│  │  (drag)     │  │  (if/else)  │  │ (variables) │          │
-│  └─────────────┘  └─────────────┘  └─────────────┘          │
-│                         │                                    │
-│                         ▼                                    │
-│              ┌─────────────────────┐                        │
-│              │   Genera archivos   │                        │
-│              └─────────────────────┘                        │
-│                         │                                    │
-└─────────────────────────┼────────────────────────────────────┘
-                          ▼
-              ┌─────────────────────┐
-              │ System/             │
-              │ ├── usedFunction.emic│
-              │ ├── usedEvent.emic  │
-              │ └── userFncFile.c   │
-              └─────────────────────┘
-                          │
-                          ▼
-              ┌─────────────────────┐
-              │   generate.emic     │
-              │   (Proceso EMIC)    │
-              └─────────────────────┘
-                          │
-          ┌───────────────┼───────────────┐
-          ▼               ▼               ▼
-    ┌──────────┐   ┌──────────┐   ┌──────────┐
-    │ PCB.h    │   │ APIs     │   │ Drivers  │
-    │ (config) │   │ (.emic)  │   │ (.emic)  │
-    └──────────┘   └──────────┘   └──────────┘
-          │               │               │
-          └───────────────┼───────────────┘
-                          ▼
-              ┌─────────────────────┐
-              │     target/         │
-              │ ├── *.c, *.h       │
-              │ ├── main.c         │
-              │ ├── Makefile       │
-              │ └── nbproject/     │
-              └─────────────────────┘
-                          │
-                          ▼
-              ┌─────────────────────┐
-              │    MPLAB X IDE      │
-              │    (Compilación)    │
-              └─────────────────────┘
-                          │
-                          ▼
-              ┌─────────────────────┐
-              │  firmware.hex       │
-              │  (Flash al MCU)     │
-              └─────────────────────┘
-```
-
-## 25.11 Caso de Estudio: Crear un Módulo de Sensor
+## 25.7 Caso de Estudio: Crear un Módulo de Sensor
 
 Vamos a crear un módulo completo para un sensor de temperatura con las siguientes características:
 - LED indicador
 - Sensor de temperatura analógico
-- Comunicación USB
 - Timer para muestreo periódico
 
 ### Paso 1: Crear Estructura de Carpetas
@@ -570,12 +290,7 @@ _modules/
         └── System/
             ├── deploy.emic
             ├── generate.emic
-            ├── module.webp
-            └── emic-tabs/
-                ├── Code.html
-                ├── Data.html
-                ├── Resources.html
-                └── User.html
+            └── module.webp
 ```
 
 ### Paso 2: Crear m_description.json
@@ -584,7 +299,7 @@ _modules/
 {
     "type": "gcc",
     "toolTip": "Temperature monitoring module",
-    "description": "Module for monitoring temperature with USB communication and configurable sampling rate.",
+    "description": "Module for monitoring temperature with configurable sampling rate.",
     "Sizes": "5x3cm",
     "Mounting": "Holder Riel DIN",
 
@@ -596,12 +311,10 @@ _modules/
 
     "HardwareDescription": [
         {"PinName": "AN0", "PinType": "Analog", "PinDescription": "Temperature sensor input"},
-        {"PinName": "LED", "PinType": "Led", "PinDescription": "Status indicator"},
-        {"PinName": "USB", "PinType": "USB", "PinDescription": "Communication port"}
+        {"PinName": "LED", "PinType": "Led", "PinDescription": "Status indicator"}
     ],
 
     "features": [
-        "USB communication",
         "Configurable sampling rate",
         "Status LED indicator",
         "EMIC Bus compatible"
@@ -622,37 +335,26 @@ _modules/
 ```c
 EMIC:setOutput(TARGET:generate.txt)
 
-    //-------------- Hardware Config ---------------------
+    // Configuración del PCB
     EMIC:setInput(DEV:_pcb/pcb.emic,pcb=HRD_USB V1.1)
 
-    //-- Process EMIC-Generate files result --
+    // Archivos del Editor
     EMIC:setInput(SYS:usedFunction.emic)
     EMIC:setInput(SYS:usedEvent.emic)
 
-    //------------------- APIs -----------------------
-    // LED indicador de estado
+    // APIs del módulo - estas determinarán qué funciones
+    // aparecen en el Editor (via EMIC-Discovery)
     EMIC:setInput(DEV:_api/Indicators/LEDs/led.emic,name=status,pin=Led1)
-
-    // Timer para muestreo periódico
     EMIC:setInput(DEV:_api/Timers/timer_api.emic,name=1)
-
-    // Sensor de temperatura analógico
     EMIC:setInput(DEV:_api/Sensors/Temperature/temperature.emic,name=_X,pin=AN0)
 
-    // Comunicación USB (opcional, comentado por defecto)
-    //EMIC:setInput(DEV:_api/Wired_Communication/USB/USB_API.emic,driver=MCP2200,port=1,BufferSize=512,baud=9600,frameLf=\n,name=MCP2200)
-
-    //-------------------- main  -----------------------
+    // Main y código de usuario
     EMIC:setInput(DEV:_main/baremetal/main.emic)
-
-    //-- Copy EMIC-Generate files result ----------------
     EMIC:copy(SYS:inc/userFncFile.h > TARGET:inc/userFncFile.h)
     EMIC:copy(SYS:userFncFile.c > TARGET:userFncFile.c)
-
-    //---- Set userFncFile.c as a compiler module ---------
     EMIC:define(c_modules.userFncFile,userFncFile)
 
-    //-- Add all compiler modules to the project. --
+    // Proyecto MPLAB X
     EMIC:copy(DEV:_templates/projects/mplabx > TARGET:)
 
 EMIC:restoreOutput
@@ -662,7 +364,7 @@ EMIC:restoreOutput
 
 ```c
 EMIC:setOutput(SYS:deploy.txt)
-    //------------------- Copy generate files ----------------
+    // Crear archivos de usuario vacíos
     EMIC:setOutput(SYS:inc/userFncFile.h)
     // file: userFncFile.h
     EMIC:restoreOutput
@@ -671,8 +373,10 @@ EMIC:setOutput(SYS:deploy.txt)
     // file: userFncFile.c
     EMIC:restoreOutput
 
+    // Copiar plugins del Editor
     EMIC:copy(DEV:_templates/plugins/sidebar-tabs > SYS:EMIC-TABS)
 
+    // Generar ID único
     EMIC:setOutput(TARGET:inc/myId.h)
     #define _I2C_ID .{module.Id}.
     EMIC:restoreOutput
@@ -680,74 +384,56 @@ EMIC:setOutput(SYS:deploy.txt)
 EMIC:restoreOutput
 ```
 
-### Paso 5: Crear Resources.html
+### Resultado del Deploy + Discovery
 
-```html
-<emic-driver-container name="Variables" icon="variable">
-    <emic-variable name="temperature" type="float" brief="Current temperature" draggable="true"></emic-variable>
-    <emic-variable name="threshold" type="float" brief="Alert threshold" draggable="true"></emic-variable>
-    <emic-program-literal></emic-program-literal>
-</emic-driver-container>
+Después del proceso de instanciación (deploy + EMIC-Discovery), la carpeta `EMIC-TABS/` contendrá:
 
-<emic-driver-container name="LEDs" icon="cable">
-    <emic-program-function driver="LEDs" name="LEDs_status_state" type="uint8_t"
-        brief="Change LED state" alias="status.state" draggable="true">
-        <emic-function-parameter name="state" type="uint8_t" brief="1-on 0-off 2-toggle"></emic-function-parameter>
-    </emic-program-function>
-    <emic-program-function driver="LEDs" name="LEDs_status_blink" type="void"
-        brief="Blink the LED" alias="status.blink" draggable="true" class="subroutine">
-        <emic-function-parameter name="timeOn" type="uint16_t" brief="Time on (ms)"></emic-function-parameter>
-        <emic-function-parameter name="period" type="uint16_t" brief="Period (ms)"></emic-function-parameter>
-        <emic-function-parameter name="times" type="uint16_t" brief="Number of blinks"></emic-function-parameter>
-    </emic-program-function>
-</emic-driver-container>
-
-<emic-driver-container name="TEMPERATURE" icon="thermostat">
-    <emic-program-function driver="TEMPERATURE" name="getTemperature_X" type="float"
-        brief="Read temperature in Celsius" alias="readTemp" draggable="true">
-    </emic-program-function>
-</emic-driver-container>
-
-<emic-driver-container name="TIMER" icon="timer">
-    <emic-program-function driver="TIMER" name="setTime1" type="void"
-        brief="Set timer interval" alias="setTime1" draggable="true" class="subroutine">
-        <emic-function-parameter name="time" type="uint16_t" brief="Time in ms"></emic-function-parameter>
-        <emic-function-parameter name="mode" type="char" brief="T:timer, A:auto-reload"></emic-function-parameter>
-    </emic-program-function>
-    <emic-program-event driver="TIMER" name="etOut1" type="void"
-        brief="Timer expired event" alias="timeOut1" draggable="true" droppable="">
-    </emic-program-event>
-</emic-driver-container>
-
-<emic-driver-container name="SYSTEM" icon="settings">
-    <emic-program-event driver="SYSTEM" name="onReset" type="void"
-        brief="Module ready" alias="onReset" draggable="true" droppable="">
-    </emic-program-event>
-    <emic-program-event driver="SYSTEM" name="SystemConfig" type="void"
-        brief="System configuration" alias="SystemConfig" draggable="true" droppable="">
-    </emic-program-event>
-</emic-driver-container>
+```
+EMIC-TABS/
+├── Code        # Plugin de control de flujo (copiado del template)
+├── Data        # Plugin de variables (copiado del template)
+├── Functions   # Plugin de funciones de usuario (copiado del template)
+├── User        # Plugin personalizado (copiado del template)
+└── Resources   # GENERADO por EMIC-Discovery con funciones/eventos del módulo
 ```
 
-## 25.12 Resumen
+El archivo `Resources` es generado automáticamente por EMIC-Discovery y contendrá las funciones de LEDs, TIMER y TEMPERATURE basándose en los tags DOXYGEN de esas APIs.
 
-| Archivo | Propósito |
-|---------|-----------|
-| `m_description.json` | Metadatos y descripción para el Editor |
-| `generate.emic` | Script principal de generación de código |
-| `deploy.emic` | Inicialización al crear instancia del módulo |
-| `emic-tabs/*.html` | Interfaz visual del Editor EMIC |
-| `usedFunction.emic` | Funciones usadas (generado por Editor) |
-| `usedEvent.emic` | Eventos usados (generado por Editor) |
-| `userFncFile.c` | Código del usuario (generado por Editor) |
+## 25.8 Resumen
+
+### Archivos de un Módulo
+
+| Archivo | Propósito | Capítulo de Referencia |
+|---------|-----------|------------------------|
+| `m_description.json` | Metadatos para el Editor | Este capítulo |
+| `generate.emic` | Script de generación de código | Capítulo 23 |
+| `deploy.emic` | Script de instanciación | Capítulo 24 |
+
+### Archivos Generados Automáticamente
+
+| Archivo | Generado Por | Descripción |
+|---------|--------------|-------------|
+| `EMIC-TABS/Resources` | EMIC-Discovery | Funciones y eventos del módulo (XML) |
+| `EMIC-TABS/Code` | deploy.emic (copia) | Plugin de control de flujo |
+| `EMIC-TABS/Data` | deploy.emic (copia) | Plugin de variables |
+| `EMIC-TABS/Functions` | deploy.emic (copia) | Plugin de funciones de usuario |
 
 ### Flujo de Desarrollo de un Módulo
 
-1. **Diseñar el hardware** y crear el archivo PCB correspondiente
-2. **Crear la estructura de carpetas** del módulo
+1. **Diseñar el hardware** y crear/seleccionar el archivo PCB correspondiente
+2. **Crear la estructura de carpetas** del módulo en `_modules/Categoria/`
 3. **Definir los metadatos** en `m_description.json`
-4. **Configurar generate.emic** con las APIs y drivers necesarios
-5. **Configurar deploy.emic** para la inicialización
-6. **Crear las pestañas** del Editor en `emic-tabs/`
-7. **Probar el módulo** creando un proyecto en el Editor EMIC
-8. **Verificar la compilación** y el funcionamiento del firmware
+4. **Configurar generate.emic** seleccionando las APIs necesarias (determina qué aparece en el Editor)
+5. **Configurar deploy.emic** para la inicialización (copia plugins base)
+6. **Probar el módulo** creando un proyecto en el Editor EMIC
+7. **Verificar la compilación** en MPLAB X y el funcionamiento del firmware
+
+> **Nota**: No es necesario crear el archivo `Resources` manualmente. Se genera automáticamente por EMIC-Discovery basándose en los tags DOXYGEN de las APIs incluidas en `generate.emic`.
+
+### Referencias Cruzadas
+
+- **Capítulo 21**: Desarrollo de API - cómo crear las APIs que usa el módulo
+- **Capítulo 22**: Desarrollo de Driver - cómo crear los drivers de bajo nivel
+- **Capítulo 23**: Proceso de Generación - sistema de grupos, expansión de macros
+- **Capítulo 24**: Proceso de Deploy - instanciación y EMIC-Discovery
+- **Capítulo 26**: Plugins del Editor - sistema de plugins extensible

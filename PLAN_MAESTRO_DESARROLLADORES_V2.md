@@ -536,46 +536,46 @@ PARTE 2: VALIDACIÓN DE CONFIGURACIONES (40%)
 
 ---
 
-#### **Cap 26: Creación de Categorías y Organización del SDK**
-**Archivo:** `26_Categorias_Organizacion_SDK.md`
+#### **Cap 26: Plugins del Editor**
+**Archivo:** `26_Plugins_Editor.md`
 
-**Enfoque:** Organizar el SDK + Best practices de estructura
+**Enfoque:** Sistema de plugins del Editor EMIC y extensibilidad
 
 **Contenido:**
 ```
-1. ¿Qué son las categorías?
-   - Organización lógica
-   - APIs, Drivers, Módulos
+1. ¿Qué es un Plugin?
+   - Archivos XML que referencian Web Components
+   - Definen pestañas laterales (sidebar-tabs)
 
-2. Categorías existentes en el SDK
-   - Listar todas
-   - Propósito de cada una
+2. Ubicación de los Plugins
+   - _templates/plugins/sidebar-tabs/
+   - Copia durante deploy
 
-3. ¿Cuándo crear nueva categoría?
-   - Criterios
-   - Convenciones de nombres
+3. Plugins Estándar
+   - Code: Control de flujo, operadores, utilidades
+   - Data: Variables, arrays, structs
+   - Functions: Funciones de usuario
+   - User: Personalización (vacío por defecto)
 
-4. Estructura de carpetas por tipo:
-   - Categorías de APIs
-   - Categorías de Módulos
-   - Organización de Drivers
+4. Estructura de un Plugin
+   - Formato XML
+   - Tipos de contenedores
+   - Elementos disponibles
 
-5. Convenciones de nombres
-   - CamelCase, snake_case
-   - Prefijos y sufijos
+5. Diferencia: Plugins vs Resources
+   - Plugins: Copiados de templates
+   - Resources: Generado por EMIC-Discovery
 
-6. Metadata de categorías
-   - Archivos de descripción
-   - Documentación
+6. Web Components Disponibles
+   - Contenedores
+   - Bloques de control
+   - Operadores
+   - Funciones y eventos
 
-7. Buenas prácticas de organización
-   - Separación de concerns
-   - Reutilización
-
-8. 🆕 Validación de la organización
-   - Discovery funciona correctamente
-   - APIs encontradas
-   - Módulos visibles
+7. Plugins Personalizados (Futuro)
+   - Sistema extensible
+   - Caso de uso: módulo con pantalla LCD
+   - Estructura de deploy con plugins personalizados
 ```
 
 ---
@@ -1312,7 +1312,7 @@ VALIDACIÓN (Parte 3):
 | 23 | Trabajar con Módulos | Desarrollo Módulo Completo | 🔄 Reformular | 70% |
 | 24 | Debugging Testing | Proceso Generación Generate | 🔄 Reemplazar | 100% |
 | 25 | Integración Componentes | Configuración Dinámica | 🔄 Reformular | 80% |
-| 26 | Deployment Producción | Categorías Organización SDK | 🔄 Reemplazar | 100% |
+| 26 | Deployment Producción | Plugins del Editor | 🔄 Reemplazar | 100% |
 | 27 | Sistema Riego | Caso API LEDs Completo | 🆕 Nuevo | 100% |
 | 28 | Monitor Energía | Caso Driver I2C Sensor | 🆕 Nuevo | 100% |
 | 29 | Control Acceso | Caso Módulo Control USB | 🆕 Nuevo | 100% |
@@ -1365,7 +1365,7 @@ VALIDACIÓN (Parte 3):
 - [x] Crear Cap 23: Proceso Generación Generate ✅ **COMPLETADO** (reordenado)
 - [x] Crear Cap 24: Proceso Deploy - Instanciación de Módulo ✅ **COMPLETADO** (reordenado)
 - [x] Reescribir Cap 25: Desarrollo Módulo Completo ✅ **COMPLETADO** (reordenado)
-- [ ] Crear nuevo Cap 26: Categorías y Organización
+- [x] Crear nuevo Cap 26: Plugins del Editor ✅ **COMPLETADO**
 
 ### Fase 5: Crear Sección 5 (Casos Prácticos Desarrollo-Integración)
 - [ ] Crear Cap 27: Caso API LEDs Completo
