@@ -48,12 +48,14 @@ EMIC-Codify
 │   ├── Gestión de Archivos (setInput, setOutput, copy, restoreOutput)
 │   ├── Macros (define, unDefine)
 │   ├── Control de Flujo (if, ifdef, ifndef, elif, else, endif)
-│   └── Iteración (foreach, endfor)
+│   └── Iteración (foreach, endforeach)
 │
 ├── Sustitución de Texto
 │   ├── .{key}. → Sustitución simple
-│   ├── .{group.key}. → Sustitución con grupo
-│   └── .{group.*}. → Expansión de grupo completo
+│   ├── .{group.key}. → Sustitución con grupo (2 niveles)
+│   ├── .{g1.g2.key}. → Sustitución con 3 niveles
+│   ├── .{group.*}. → Expansión de grupo (N líneas)
+│   └── .{group.*}. .[sep]. → Expansión join (1 línea)
 │
 └── Etiquetas de Publicación
     ├── Formato DOXYGEN (@fn, @alias, @brief, @param, @return)
@@ -131,11 +133,34 @@ Para expandir todas las claves de un grupo, usar `.*`:
 // Si el grupo "inits" contiene: {LED: LED_init, Timer: Timer_init, USB: USB_init}
 
 .{inits.*}.();
-// Se expande a:
+// Se expande a (una línea por key):
 // LED_init();
 // Timer_init();
 // USB_init();
 ```
+
+**Expansión Join (una sola línea):** Agregar `.[separador].` después para generar una sola línea:
+
+```c
+enum { .{canales.*}. .[, ]. };
+// → enum { ADC_AN0, ADC_AN1, ADC_AN2 };
+```
+
+### 2.6 Macros de 3 Niveles
+
+Para organización jerárquica más compleja, se soportan **3 niveles de profundidad**:
+
+```c
+// Definir con 3 niveles: grupo.subgrupo.clave
+EMIC:define(hw.uart.baud, 9600)
+EMIC:define(hw.uart.parity, none)
+EMIC:define(hw.spi.clock, 1000000)
+
+// Acceder: .{hw.uart.baud}. → 9600
+// Expandir: .{hw.uart.*}. → una línea por propiedad de uart
+```
+
+La distinción entre 2 y 3 niveles se determina automáticamente por la cantidad de puntos en el nombre.
 
 ---
 
@@ -167,8 +192,8 @@ EMIC:comando([parámetros])
 | `elif` | `EMIC:elif(condition)` | Else if |
 | `else` | `EMIC:else` | Else |
 | `endif` | `EMIC:endif` | Fin de condicional |
-| `foreach` | `EMIC:foreach(group)` | Itera sobre grupo |
-| `endfor` | `EMIC:endfor` | Fin de iteración |
+| `foreach` | `EMIC:foreach(group.*)` | Itera sobre colección |
+| `endforeach` | `EMIC:endforeach` | Fin de iteración |
 | `tag` | `EMIC:tag(driverName = xxx)` | Define nombre de driver |
 | `json` | `EMIC:json(type = xxx)` | Define recurso JSON |
 
@@ -186,8 +211,14 @@ const char* MCU_NAME = ".{system.mcu}.";
 // Sustitución con valor por defecto
 uint8_t baudRate = .{9600|config.baudRate}.;
 
-// Expansión de grupo completo
+// Expansión de grupo completo (N líneas)
 .{inits.*}.();  // Expande todas las claves del grupo "inits"
+
+// Expansión join (1 línea con separador)
+enum { .{canales.*}. .[, ]. };  // Todos los valores separados por coma
+
+// Sustitución con 3 niveles
+.{hw.uart.baud}.  // → 9600
 ```
 
 ### 3.4 Orden de Búsqueda de Macros

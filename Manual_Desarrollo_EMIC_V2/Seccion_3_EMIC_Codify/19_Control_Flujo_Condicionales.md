@@ -56,6 +56,8 @@ El control de flujo en EMIC-Codify permite generar código condicionalmente, ada
 | `else` | Bloque por defecto | `EMIC:else` |
 | `endif` | Cerrar bloque condicional | `EMIC:endif` |
 
+> **Nota:** Para iteración sobre colecciones, EMIC-Codify también ofrece `EMIC:foreach` / `EMIC:endforeach`, documentado en el [Capítulo 18: Sistema de Macros y Sustitución](18_Sistema_Macros_Sustitucion.md#8-iteración-con-foreachendforeach).
+
 ---
 
 ## 2. Comando ifndef/ifdef
@@ -73,6 +75,14 @@ EMIC:ifdef macro_name
     // Se ejecuta si macro_name SÍ está definida
 EMIC:endif
 ```
+
+El argumento puede ser una clave simple, una clave de grupo (2 niveles) o una clave de 3 niveles:
+
+| Formato | Verifica existencia en |
+|---------|----------------------|
+| `ifdef clave` | Macros globales y locales |
+| `ifdef grupo.clave` | Colección de 2 niveles |
+| `ifdef grupo.subgrupo.clave` | Colección de 3 niveles |
 
 ### 2.2 Uso Principal: Protección contra Inclusión Múltiple
 
@@ -170,6 +180,39 @@ EMIC:define(UART.{port}._CALLBACK_RX, true)
 // En otro archivo:
 EMIC:ifdef UART1_CALLBACK_RX
     // Código para manejar callback de recepción
+EMIC:endif
+```
+
+### 2.6 ifdef/ifndef con Macros de 3 Niveles
+
+Los condicionales de existencia también funcionan con colecciones de 3 niveles:
+
+```c
+EMIC:define(hw.uart.baud, 9600)
+EMIC:define(hw.uart.parity, none)
+
+// Verificar si existe una propiedad específica
+EMIC:ifdef hw.uart.baud
+    // Configurar baudrate personalizado
+    UART_SetBaud(.{hw.uart.baud}.);
+EMIC:endif
+
+EMIC:ifndef hw.uart.flowControl
+    // No hay flow control definido, usar default
+    #define FLOW_CONTROL_NONE
+EMIC:endif
+```
+
+Esto es útil con `EMIC:unDefine` para activar/desactivar features dinámicamente:
+
+```c
+EMIC:define(features.debug.verbose, true)
+
+// Más adelante, desactivar en release
+EMIC:unDefine(features.debug.verbose)
+
+EMIC:ifdef features.debug.verbose
+    // Este bloque ya NO se ejecuta
 EMIC:endif
 ```
 
@@ -372,6 +415,27 @@ EMIC:if(.{system.ucName}.==PIC24FJ64GA004)
 EMIC:endif
 ```
 
+### 4.5 Comparación con Macros de 3 Niveles
+
+Las macros de 3 niveles se sustituyen antes de evaluar la condición, por lo que funcionan directamente en `EMIC:if`:
+
+```c
+EMIC:define(hw.uart.baud, 9600)
+EMIC:define(hw.uart.parity, none)
+
+// Comparar valor de una macro de 3 niveles
+EMIC:if(.{hw.uart.parity}.==none)
+    // Sin paridad
+    #define UART_PARITY  0
+EMIC:elif(.{hw.uart.parity}.==even)
+    // Paridad par
+    #define UART_PARITY  1
+EMIC:elif(.{hw.uart.parity}.==odd)
+    // Paridad impar
+    #define UART_PARITY  2
+EMIC:endif
+```
+
 ---
 
 ## 5. Generación Condicional de Código
@@ -446,6 +510,37 @@ EMIC:endif
 
 #endif
 ```
+
+### 5.4 Condicionales dentro de foreach
+
+Los bloques `EMIC:foreach` pueden contener condicionales. Al expandir cada iteración, las condiciones se evalúan con los valores correspondientes:
+
+```c
+EMIC:define(perifericos.uart, uart)
+EMIC:define(perifericos.spi, spi)
+EMIC:define(perifericos.i2c, i2c)
+
+EMIC:define(hw.uart.irq, true)
+EMIC:define(hw.spi.irq, true)
+// i2c no tiene irq definido
+
+EMIC:foreach(perifericos.*)
+    EMIC:ifdef hw.{*}.irq
+        void .{*}._IRQHandler(void);
+    EMIC:endif
+EMIC:endforeach
+```
+
+Genera:
+```c
+void uart_IRQHandler(void);
+void spi_IRQHandler(void);
+// i2c se omite porque hw.i2c.irq no existe
+```
+
+> **Nota sobre `.{*}.` en paths:** En `hw.{*}.irq`, el iterador `.{*}.` se detecta automáticamente como parte de un path (rodeado por alfanuméricos en ambos lados) y mantiene los puntos estructurales: `hw.uart.irq`. Mientras que en `.{*}._IRQHandler`, se detecta como standalone y consume los puntos: `uart_IRQHandler`. Ver [Capítulo 18, sección 8.7](18_Sistema_Macros_Sustitucion.md#87-semántica-de--dentro-del-foreach) para detalles.
+
+> Para la documentación completa de `foreach`, ver [Capítulo 18, sección 8](18_Sistema_Macros_Sustitucion.md#8-iteración-con-foreachendforeach).
 
 ---
 
@@ -724,10 +819,13 @@ EMIC:endif
 El control de flujo en EMIC-Codify permite:
 
 1. **Proteger archivos** contra inclusión múltiple con `ifndef/endif`
-2. **Generar código condicional** según configuración del usuario con `if/endif`
-3. **Publicar funciones selectivamente** en EMIC Discovery
-4. **Abstraer diferencias de hardware** mediante el patrón HAL + `system.ucName`
-5. **Crear APIs configurables** con Configurators JSON
+2. **Generar código condicional** según configuración del usuario con `if/elif/else/endif`
+3. **Evaluar macros de 2 y 3 niveles** en `ifdef`/`ifndef` y en condiciones `if`
+4. **Combinar con iteración** usando condicionales dentro de bloques `foreach`
+5. **Gestionar features dinámicamente** con `define`/`unDefine` + `ifdef`
+6. **Publicar funciones selectivamente** en EMIC Discovery
+7. **Abstraer diferencias de hardware** mediante el patrón HAL + `system.ucName`
+8. **Crear APIs configurables** con Configurators JSON
 
 **Patrones más usados:**
 
@@ -741,6 +839,11 @@ EMIC:endif
 // Código según configuración
 EMIC:if(.{config.opcion}.=="valor")
 // código condicional
+EMIC:endif
+
+// Condicional con macro de 3 niveles
+EMIC:ifdef hw.uart.baud
+// código si existe la propiedad
 EMIC:endif
 
 // Abstracción de MCU (en HAL)
