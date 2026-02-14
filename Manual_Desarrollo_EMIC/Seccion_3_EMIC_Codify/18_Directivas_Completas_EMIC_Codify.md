@@ -32,11 +32,12 @@ Este capítulo está diseñado para ser usado como **referencia rápida** durant
 
 ## Catálogo de Directivas
 
-EMIC-Codify proporciona **9 directivas principales**:
+EMIC-Codify proporciona **12 directivas principales**:
 
 | Directiva | Categoría | Propósito | Frecuencia de Uso |
 |-----------|-----------|-----------|-------------------|
 | `EMIC:define` | Definición | Definir variables globales | ⭐⭐⭐⭐⭐ |
+| `EMIC:unDefine` | Definición | Eliminar variable definida | ⭐⭐ |
 | `EMIC:setInput` | Inclusión | Incluir archivos .emic | ⭐⭐⭐⭐⭐ |
 | `EMIC:copy` | Copia | Copiar archivos con sustitución | ⭐⭐⭐⭐⭐ |
 | `EMIC:setOutput` | Redirección | Redirigir salida a archivo | ⭐⭐⭐⭐ |
@@ -44,9 +45,11 @@ EMIC-Codify proporciona **9 directivas principales**:
 | `EMIC:ifdef` | Condicional | Si variable está definida | ⭐⭐⭐⭐ |
 | `EMIC:ifndef` | Condicional | Si variable NO está definida | ⭐⭐⭐⭐⭐ |
 | `EMIC:endif` | Condicional | Fin de bloque condicional | ⭐⭐⭐⭐⭐ |
+| `EMIC:foreach` | Iteración | Iterar sobre colección | ⭐⭐⭐⭐ |
+| `EMIC:endforeach` | Iteración | Fin de bloque foreach | ⭐⭐⭐⭐ |
 | `EMIC:tag` | Metadata | Etiquetar recursos | ⭐⭐⭐ |
 
-**Nota:** No existe `EMIC:else` - usar `EMIC:ifndef` para lógica inversa.
+**Nota:** También existe `EMIC:else`, `EMIC:elif` e `EMIC:if` para condicionales avanzados.
 
 ---
 
@@ -146,6 +149,61 @@ EMIC:define("name", "led1")  // ❌ No usar comillas
 **✅ Correcto:**
 ```emic
 EMIC:define(name, led1)  // ✅ Sin comillas
+```
+
+---
+
+### `EMIC:unDefine` - Eliminar Variable
+
+#### Sintaxis Formal
+
+```bnf
+EMIC:unDefine(<nombre_variable>)
+
+<nombre_variable> ::= identificador (puede contener puntos para colecciones)
+```
+
+#### Descripción
+
+Elimina una variable previamente definida. Soporta variables globales simples y variables con namespace (colecciones de 2 y 3 niveles).
+
+#### Parámetros
+
+| Parámetro | Tipo | Requerido | Descripción |
+|-----------|------|-----------|-------------|
+| `nombre_variable` | string | Si | Nombre de la variable a eliminar |
+
+#### Comportamiento
+
+1. **Sin punto**: Elimina de variables globales (`misMacros["global"]`)
+2. **Un punto** (ej: `col.key`): Elimina `key` de la colección `col`
+3. **Dos puntos** (ej: `col1.col2.key`): Elimina `key` de la colección de 3 niveles `col1.col2`
+4. **Si no existe**: No produce error, se ignora silenciosamente
+
+#### Ejemplos
+
+**Ejemplo 1: Eliminar variable global**
+```emic
+EMIC:define(USE_DEBUG, true)
+// ... código de debug ...
+EMIC:unDefine(USE_DEBUG)
+// USE_DEBUG ya no existe
+```
+
+**Ejemplo 2: Eliminar de colección**
+```emic
+EMIC:define(c_modules.uart1, uart1)
+EMIC:define(c_modules.timer1, timer1)
+EMIC:unDefine(c_modules.uart1)
+// Solo queda c_modules.timer1
+```
+
+**Ejemplo 3: Eliminar de colección de 3 niveles**
+```emic
+EMIC:define(hw.uart.baud, 9600)
+EMIC:define(hw.uart.parity, none)
+EMIC:unDefine(hw.uart.parity)
+// Solo queda hw.uart.baud
 ```
 
 ---
@@ -857,6 +915,291 @@ EMIC:endif  // ✅ Ambos cerrados
 
 ---
 
+## Directivas de Iteración
+
+### `EMIC:foreach` / `EMIC:endforeach` - Iterar sobre Colección
+
+#### Sintaxis Formal
+
+```bnf
+EMIC:foreach(<colección>.*)
+    <bloque>
+EMIC:endforeach
+
+<colección> ::= nombre de colección definida con EMIC:define
+<bloque>    ::= cualquier contenido EMIC-Codify (puede contener directivas)
+```
+
+#### Descripción
+
+Repite un bloque de texto para cada elemento de una colección. Es la versión multilínea de la expansión inline con comodín `.{col.*}.`.
+
+#### Parámetros
+
+| Parámetro | Tipo | Requerido | Descripción |
+|-----------|------|-----------|-------------|
+| `colección.*` | pattern | Si | Patrón con comodín indicando la colección a iterar |
+
+#### Variables del Iterador
+
+Dentro del bloque, se pueden usar variables especiales para acceder al elemento actual:
+
+| Variable | Descripción | Ejemplo con key "temp" |
+|----------|-------------|----------------------|
+| `.{*}.` | Nombre de la key actual (texto literal) | `temp` |
+| `{*}` | Key dentro de expresiones macro | `.{sensores.{*}}.` → `.{sensores.temp}.` |
+
+#### Comportamiento
+
+1. **Captura** todas las líneas entre `foreach` y `endforeach`
+2. **Obtiene las keys** de la colección con `getValues()`
+3. **Por cada key**, duplica el bloque reemplazando `.{*}.` y `{*}`
+4. **Encola las líneas** expandidas para reprocesamiento
+5. **El reprocesamiento** resuelve las macros `.{col.keyN}.` a sus valores finales
+
+#### Ejemplos
+
+**Ejemplo 1: Foreach básico (2 niveles)**
+```emic
+EMIC:define(sensores.temp, ADC_CH0)
+EMIC:define(sensores.hum, ADC_CH1)
+EMIC:define(sensores.pres, ADC_CH2)
+
+EMIC:foreach(sensores.*)
+    uint16_t read_.{*}.(void) { return .{sensores.{*}}.; }
+EMIC:endforeach
+```
+
+Genera:
+```c
+uint16_t read_temp(void) { return ADC_CH0; }
+uint16_t read_hum(void) { return ADC_CH1; }
+uint16_t read_pres(void) { return ADC_CH2; }
+```
+
+**Ejemplo 2: Foreach con 3 niveles**
+```emic
+EMIC:define(hw.uart.baud, 9600)
+EMIC:define(hw.uart.parity, none)
+
+EMIC:foreach(hw.uart.*)
+    config_uart(.{*}., .{hw.uart.{*}}.);
+EMIC:endforeach
+```
+
+Genera:
+```c
+config_uart(baud, 9600);
+config_uart(parity, none);
+```
+
+**Ejemplo 3: Foreach con directivas EMIC en el bloque**
+```emic
+EMIC:define(modulos.uart, uart)
+EMIC:define(modulos.spi, spi)
+
+EMIC:foreach(modulos.*)
+    EMIC:setInput(DEV:_hal/.{*}./.{*}..emic)
+EMIC:endforeach
+```
+
+Equivale a:
+```emic
+EMIC:setInput(DEV:_hal/uart/uart.emic)
+EMIC:setInput(DEV:_hal/spi/spi.emic)
+```
+
+#### Foreach Anidado
+
+Se pueden anidar foreach usando iteradores de nivel: `.{*}.` para el externo, `.{**}.` para el interno y `.{***}.` para un tercer nivel.
+
+```emic
+EMIC:define(hw.uart.baud, 9600)
+EMIC:define(hw.uart.parity, none)
+EMIC:define(hw.spi.clock, 1000000)
+EMIC:define(hw.spi.mode, 0)
+
+EMIC:foreach(hw.*)
+    // Periferico: .{*}.
+    EMIC:foreach(hw.{*}.*)
+        set_param(".{*}.", ".{**}.", .{hw.{*}.{**}}.);
+    EMIC:endforeach
+EMIC:endforeach
+```
+
+Genera:
+```c
+// Periferico: uart
+set_param("uart", "baud", 9600);
+set_param("uart", "parity", none);
+// Periferico: spi
+set_param("spi", "clock", 1000000);
+set_param("spi", "mode", 0);
+```
+
+**Regla de iteradores:**
+
+| Nivel | Variable literal | Variable en expresión |
+|-------|-----------------|----------------------|
+| Externo | `.{*}.` | `{*}` |
+| Interno | `.{**}.` | `{**}` |
+| Tercer nivel | `.{***}.` | `{***}` |
+
+Al expandir un nivel, los iteradores internos se "promueven": `{**}` pasa a ser `{*}` para el foreach hijo.
+
+#### Errores Comunes
+
+**Error: foreach sin endforeach**
+```emic
+EMIC:foreach(sensores.*)
+    // código
+// Falta EMIC:endforeach → Error al llegar a fin de archivo
+```
+
+**Error: endforeach sin foreach**
+```emic
+EMIC:endforeach  // Error: no hay foreach abierto
+```
+
+**Error: Patrón sin comodín**
+```emic
+EMIC:foreach(sensores)  // Error: requiere .* en el patrón
+```
+
+---
+
+## Expansión Inline con Comodín
+
+### Expansión Multilínea (una línea por key)
+
+#### Sintaxis
+
+```bnf
+texto .{colección.*}. texto
+```
+
+#### Descripción
+
+Cuando una línea contiene `.{colección.*}.`, se expande a N líneas (una por cada key de la colección). Es la versión de una sola línea del `EMIC:foreach`.
+
+#### Ejemplo
+
+```emic
+EMIC:define(canales.ch0, ADC_AN0)
+EMIC:define(canales.ch1, ADC_AN1)
+EMIC:define(canales.ch2, ADC_AN2)
+
+uint16_t val = .{canales.*}.;
+```
+
+Se expande primero a:
+```
+uint16_t val = .{canales.ch0}.;
+uint16_t val = .{canales.ch1}.;
+uint16_t val = .{canales.ch2}.;
+```
+
+Y luego cada macro se resuelve a su valor:
+```c
+uint16_t val = ADC_AN0;
+uint16_t val = ADC_AN1;
+uint16_t val = ADC_AN2;
+```
+
+#### Patrones con 3 Niveles
+
+**Comodín en el tercer nivel** (`col1.col2.*`):
+```emic
+// Expande las propiedades de hw.uart
+prop = .{hw.uart.*}.;
+// → prop = .{hw.uart.baud}.; y prop = .{hw.uart.parity}.;
+```
+
+**Comodín en el segundo nivel** (`col1.*.key`):
+```emic
+// Expande los periféricos que tienen "speed"
+speed = .{hw.*.speed}.;
+// → speed = .{hw.uart.speed}.; y speed = .{hw.spi.speed}.;
+```
+
+**Doble comodín** (`col1.*.*`):
+```emic
+// Expande todos los periféricos y todas sus propiedades
+val = .{hw.*.*}.;
+// Primera pasada: val = .{hw.uart.*}.; y val = .{hw.spi.*}.;
+// Segunda pasada: val = .{hw.uart.baud}.; val = .{hw.uart.parity}.; ...
+```
+
+---
+
+### Expansión con Separador (Join en una línea)
+
+#### Sintaxis
+
+```bnf
+texto .{colección.*}. .[separador]. texto
+```
+
+#### Descripción
+
+Cuando `.{colección.*}.` va seguido de `.[separador].`, en lugar de generar N líneas, genera **una sola línea** con todos los valores concatenados por el separador indicado.
+
+#### Ejemplo
+
+```emic
+EMIC:define(canales.ch0, ADC_AN0)
+EMIC:define(canales.ch1, ADC_AN1)
+EMIC:define(canales.ch2, ADC_AN2)
+
+enum { .{canales.*}. .[, ]. };
+```
+
+Se expande primero a:
+```
+enum { .{canales.ch0}., .{canales.ch1}., .{canales.ch2}. };
+```
+
+Y luego se resuelven los valores:
+```c
+enum { ADC_AN0, ADC_AN1, ADC_AN2 };
+```
+
+#### Más Ejemplos
+
+**Separador `|`:**
+```emic
+int flags = .{opciones.*}. .[ | ]. ;
+// → int flags = FLAG_A | FLAG_B | FLAG_C ;
+```
+
+**Separador `+`:**
+```emic
+int total = .{valores.*}. .[ + ]. ;
+// → int total = 10 + 20 + 30 ;
+```
+
+**Separador `\n` (concatenación sin separador visible):**
+```emic
+.{includes.*}. .[
+].
+// → Genera cada include en líneas separadas pero desde una sola línea fuente
+```
+
+**Con 3 niveles:**
+```emic
+int params = .{hw.uart.*}. .[, ]. ;
+// → int params = 9600, none ;
+```
+
+#### Comparación: Multilínea vs Join
+
+| Sintaxis | Resultado | Uso típico |
+|----------|-----------|------------|
+| `.{col.*}.` | N líneas separadas | Declaraciones, definiciones |
+| `.{col.*}. .[sep].` | 1 línea con separador | Enums, listas de argumentos, expresiones |
+
+---
+
 ## Directivas de Metadata
 
 ### `EMIC:tag` - Etiquetar Recurso
@@ -1004,6 +1347,7 @@ En algunos archivos antiguos del SDK, se encuentra una directiva `EMIC:json` que
 | Directiva | Sintaxis | Uso Principal | Ejemplo Corto |
 |-----------|----------|---------------|---------------|
 | **define** | `EMIC:define(var, val)` | Definir variable global | `EMIC:define(name, led1)` |
+| **unDefine** | `EMIC:unDefine(var)` | Eliminar variable | `EMIC:unDefine(c_modules.uart1)` |
 | **setInput** | `EMIC:setInput(file, p=v)` | Incluir archivo | `EMIC:setInput(DEV:_api/led.emic, name=led1)` |
 | **copy** | `EMIC:copy(src > dst, p=v)` | Copiar con sustitución | `EMIC:copy(led.c > led_.{n}..c, n=.{n}.)` |
 | **setOutput** | `EMIC:setOutput(file)` | Redirigir salida | `EMIC:setOutput(TARGET:out.c)` |
@@ -1011,7 +1355,19 @@ En algunos archivos antiguos del SDK, se encuentra una directiva `EMIC:json` que
 | **ifdef** | `EMIC:ifdef var ... EMIC:endif` | Si definida | `EMIC:ifdef USE_UART ... EMIC:endif` |
 | **ifndef** | `EMIC:ifndef var ... EMIC:endif` | Si NO definida | `EMIC:ifndef GUARD_ ... EMIC:endif` |
 | **endif** | `EMIC:endif` | Cerrar condicional | `EMIC:endif` |
+| **foreach** | `EMIC:foreach(col.*)` | Iterar colección | `EMIC:foreach(sensores.*)` |
+| **endforeach** | `EMIC:endforeach` | Cerrar iteración | `EMIC:endforeach` |
 | **tag** | `EMIC:tag(key = val)` | Metadata | `EMIC:tag(driverName = LEDs)` |
+
+### Cheat Sheet de Expansión Inline
+
+| Sintaxis | Resultado | Ejemplo |
+|----------|-----------|---------|
+| `.{col.*}.` | N líneas (una por key) | `.{canales.*}.` → una línea por canal |
+| `.{col.*}. .[sep].` | 1 línea con separador | `.{canales.*}. .[, ].` → `ch0, ch1, ch2` |
+| `.{c1.c2.*}.` | N líneas (3er nivel) | `.{hw.uart.*}.` → una línea por propiedad |
+| `.{c1.*.key}.` | N líneas (comodín medio) | `.{hw.*.speed}.` → una línea por periférico |
+| `.{c1.*.*}.` | N×M líneas (doble comodín) | `.{hw.*.*}.` → todas las propiedades de todos |
 
 ---
 
@@ -1025,7 +1381,11 @@ En algunos archivos antiguos del SDK, se encuentra una directiva `EMIC:json` que
 | `define` | ⭐⭐⭐⭐⭐ | Configuración global, módulos compilación |
 | `setOutput` + `restoreOutput` | ⭐⭐⭐⭐ | Generar archivos, logging |
 | `ifdef` | ⭐⭐⭐⭐ | Features opcionales, eventos |
+| `foreach` + `endforeach` | ⭐⭐⭐⭐ | Iterar colecciones, generación masiva |
+| `.{col.*}.` (inline) | ⭐⭐⭐⭐ | Expansión rápida en una línea |
+| `.{col.*}. .[sep].` (join) | ⭐⭐⭐ | Enums, listas de argumentos |
 | `tag` | ⭐⭐⭐ | Inicio de APIs/Drivers |
+| `unDefine` | ⭐⭐ | Cleanup de variables temporales |
 
 ---
 
@@ -1038,6 +1398,9 @@ En algunos archivos antiguos del SDK, se encuentra una directiva `EMIC:json` que
 │
 ├─ Definir una variable global
 │   └─→ EMIC:define(nombre, valor)
+│
+├─ Eliminar una variable
+│   └─→ EMIC:unDefine(nombre)
 │
 ├─ Incluir otro archivo .emic
 │   └─→ EMIC:setInput(archivo, param=val)
@@ -1066,6 +1429,18 @@ En algunos archivos antiguos del SDK, se encuentra una directiva `EMIC:json` que
 │       └─→ EMIC:ifndef VAR
 │           ... código ...
 │           EMIC:endif
+│
+├─ Iterar sobre una colección
+│   ├─ Multilínea (bloque por cada key)
+│   │   └─→ EMIC:foreach(col.*)
+│   │       ... bloque con .{*}. y {*} ...
+│   │       EMIC:endforeach
+│   │
+│   ├─ Una línea por key (inline)
+│   │   └─→ texto .{col.*}. texto
+│   │
+│   └─ Una sola línea con separador (join)
+│       └─→ texto .{col.*}. .[sep]. texto
 │
 └─ Etiquetar componente para EMIC-Discovery
     └─→ EMIC:tag(driverName = MiComponente)
@@ -1269,19 +1644,23 @@ EMIC:define(result, 15)  // ✅ Calcular manualmente
 
 ### Puntos Clave
 
-1. **9 Directivas Principales:**
-   - `define`, `setInput`, `copy` (uso constante)
-   - `setOutput`, `restoreOutput` (generación archivos)
+1. **12 Directivas Principales:**
+   - `define`, `unDefine`, `setInput`, `copy` (gestión de datos y archivos)
+   - `setOutput`, `restoreOutput` (generación de archivos)
    - `ifdef`, `ifndef`, `endif` (condicionales)
+   - `foreach`, `endforeach` (iteración sobre colecciones)
    - `tag` (metadata)
 
 2. **Patrones Esenciales:**
    - Include Guard: `ifndef` + `define` + `endif`
    - Multi-Instancia: `setInput` múltiples veces
    - Copia Parametrizada: `copy` con sustituciones
+   - Iteración: `foreach` / `endforeach` para colecciones
+   - Expansión Inline: `.{col.*}.` para una línea por key
+   - Expansión Join: `.{col.*}. .[sep].` para una sola línea
 
 3. **Reglas de Oro:**
-   - Siempre cerrar condicionales (`endif`)
+   - Siempre cerrar condicionales (`endif`) y foreach (`endforeach`)
    - Siempre restaurar salida (`restoreOutput`)
    - Nunca usar comillas en parámetros
    - Propagar variables locales explícitamente
@@ -1291,6 +1670,8 @@ EMIC:define(result, 15)  // ✅ Calcular manualmente
    - `setInput` → Incluir componentes
    - `copy` → Generar archivos C/H
    - `define` → Configuración global
+   - `foreach` → Iterar colecciones de módulos/periféricos
+   - `.{col.*}. .[, ].` → Generar enums, listas
 
 ### Referencia Visual
 
@@ -1301,6 +1682,7 @@ EMIC:define(result, 15)  // ✅ Calcular manualmente
 │                                         │
 │  DEFINICIÓN                             │
 │  ├─ EMIC:define                         │
+│  └─ EMIC:unDefine                       │
 │                                         │
 │  INCLUSIÓN                              │
 │  ├─ EMIC:setInput                       │
@@ -1316,6 +1698,14 @@ EMIC:define(result, 15)  // ✅ Calcular manualmente
 │  ├─ EMIC:ifdef                          │
 │  ├─ EMIC:ifndef                         │
 │  └─ EMIC:endif                          │
+│                                         │
+│  ITERACIÓN                              │
+│  ├─ EMIC:foreach                        │
+│  └─ EMIC:endforeach                     │
+│                                         │
+│  EXPANSIÓN INLINE                       │
+│  ├─ .{col.*}.          (multilínea)     │
+│  └─ .{col.*}. .[sep].  (join)          │
 │                                         │
 │  METADATA                               │
 │  └─ EMIC:tag                            │
