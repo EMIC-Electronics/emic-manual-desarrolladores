@@ -1,4 +1,4 @@
-# PLAN MAESTRO - Manual de Desarrollo EMIC SDK
+﻿# PLAN MAESTRO - Manual de Desarrollo EMIC SDK
 
 **Versión:** 1.0
 **Fecha de Creación:** 2025-11-04
@@ -29,292 +29,8 @@
 - [ ] **Cap 14** - Carpeta `_system/` - Sistema Core EMIC
 - [ ] **Cap 15** - Carpeta `_util/` - Utilidades Generales
 
-### Sección 3: EMIC-Codify
-- [ ] **Cap 16** - Fundamentos de EMIC-Codify
-- [ ] **Cap 17** - Comandos EMIC-Codify (Parte 1: Gestión de Archivos)
-- [ ] **Cap 18** - Comandos EMIC-Codify (Parte 2: Macros y Sustitución)
-- [ ] **Cap 19** - Comandos EMIC-Codify (Parte 3: Control de Flujo)
-- [ ] **Cap 20** - Etiquetado de Recursos (Tags)
-
-### Sección 4: Desarrollo Práctico
-- [ ] **Cap 21** - Desarrollo de una API EMIC - Paso a Paso
-- [ ] **Cap 22** - Desarrollo de un Driver EMIC
-- [ ] **Cap 23** - Desarrollo de un Módulo EMIC Completo
-- [ ] **Cap 24** - Creación de Categorías de Módulos
-- [ ] **Cap 25** - El Proceso de Generación (generate.emic)
-- [ ] **Cap 26** - Configuración Dinámica de Módulos
-
-### Sección 5: Casos Prácticos
-- [ ] **Cap 27** - Caso Práctico: API de LEDs
-- [ ] **Cap 28** - Caso Práctico: Driver de Sensor I2C
-- [ ] **Cap 29** - Caso Práctico: Módulo de Control con USB
-- [ ] **Cap 30** - Caso Práctico: Módulo Multi-API Complejo
-
-### Sección 6: Avanzado
-- [ ] **Cap 31** - Buenas Prácticas y Convenciones
-- [ ] **Cap 32** - Testing y Validación
-- [ ] **Cap 33** - Troubleshooting y Debugging
-- [ ] **Cap 34** - Optimización y Performance
-
-### Sección 7: Referencias
-- [ ] **Cap 35** - Apéndice A: Referencia Rápida de Comandos
-- [ ] **Cap 36** - Apéndice B: Referencia Rápida de Tags
-- [ ] **Cap 37** - Apéndice C: Plantillas de Código
-- [ ] **Cap 38** - Apéndice D: Recursos Adicionales
-
----
-
-## 🎯 ESTRUCTURA DEL MANUAL
-
-```
-Manual_Desarrollo_EMIC/
-│
-├── Seccion_1_Introduccion/
-│   ├── 00_Portada.md
-│   ├── 01_Introduccion.md
-│   ├── 02_Arquitectura.md
-│   ├── 03_Glosario.md
-│   └── 04_Ventajas.md
-│
-├── Seccion_2_Estructura_SDK/
-│   ├── 05_Vision_General_SDK.md
-│   ├── 06_Carpeta_Modules.md
-│   ├── 07_Carpeta_API.md
-│   ├── 08_Carpeta_Drivers.md
-│   ├── 09_Carpeta_HAL.md
-│   ├── 10_Carpeta_Hard.md
-│   ├── 11_Carpeta_Main.md
-│   ├── 12_Carpeta_PCB.md
-│   ├── 13_Carpeta_Templates.md
-│   ├── 14_Carpeta_System.md
-│   └── 15_Carpeta_Util.md
-│
-├── Seccion_3_EMIC_Codify/
-│   ├── 16_Fundamentos_Codify.md
-│   ├── 17_Comandos_Archivos.md
-│   ├── 18_Comandos_Macros.md
-│   ├── 19_Comandos_Control.md
-│   └── 20_Etiquetado_Recursos.md
-│
-├── Seccion_4_Desarrollo/
-│   ├── 21_Desarrollo_API.md
-│   ├── 22_Desarrollo_Driver.md
-│   ├── 23_Desarrollo_Modulo.md
-│   ├── 24_Creacion_Categorias.md
-│   ├── 25_Proceso_Generacion.md
-│   └── 26_Configuracion_Dinamica.md
-│
-├── Seccion_5_Casos_Practicos/
-│   ├── 27_Practica_API_LED.md
-│   ├── 28_Practica_Driver_I2C.md
-│   ├── 29_Practica_Modulo_USB.md
-│   └── 30_Practica_Modulo_Complejo.md
-│
-├── Seccion_6_Avanzado/
-│   ├── 31_Buenas_Practicas.md
-│   ├── 32_Testing.md
-│   ├── 33_Troubleshooting.md
-│   └── 34_Optimizacion.md
-│
-└── Seccion_7_Referencias/
-    ├── 35_Referencia_Comandos.md
-    ├── 36_Referencia_Tags.md
-    ├── 37_Plantillas_Codigo.md
-    └── 38_Recursos_Adicionales.md
-```
-
----
-
-## 📝 PROMPTS PARA CADA CAPÍTULO
 
 ### SECCIÓN 1: INTRODUCCIÓN Y FUNDAMENTOS
-
----
-
-#### **CAPÍTULO 00: Portada y Tabla de Contenidos**
-
-**Archivo de Salida:** `Seccion_1_Introduccion/00_Portada.md`
-
-**Prompt para Claude Code:**
-
-```
-Crea el Capítulo 00 "Portada y Tabla de Contenidos" del Manual de Desarrollo EMIC SDK.
-
-CONTEXTO:
-- Este es el primer documento del manual
-- Audiencia: Desarrolladores de recursos EMIC (APIs, Drivers, Módulos)
-- SDK de referencia: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M
-
-REFERENCIAS DE ARCHIVOS:
-- @PLAN_MAESTRO_MANUAL_DESARROLLO_EMIC.md (este archivo)
-- @EMIC.md (descripción general de EMIC)
-- @INFO/EMIC(Introduccion).md
-
-CONTENIDO REQUERIDO:
-1. Portada profesional con:
-   - Título: "Manual de Desarrollo EMIC SDK - Módulos y APIs"
-   - Subtítulo: "Guía Completa para Desarrolladores de Recursos EMIC"
-   - Versión y fecha
-   - Logo/Banner (ASCII art o referencia)
-
-2. Información del manual:
-   - Audiencia objetivo
-   - Requisitos previos
-   - Estructura del manual
-   - Cómo usar este manual
-
-3. Tabla de contenidos completa con:
-   - Las 7 secciones principales
-   - Todos los 38 capítulos
-   - Links navegables (anchors)
-
-4. Convenciones usadas en el manual:
-   - Bloques de código
-   - Notas importantes
-   - Advertencias
-   - Tips y trucos
-   - Referencias cruzadas
-
-FORMATO:
-- Markdown profesional
-- Tabla de contenidos navegable
-- Diseño visual atractivo
-
-SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_1_Introduccion\00_Portada.md
-```
-
-**Dependencias:** Ninguna (primer capítulo)
-
----
-
-#### **CAPÍTULO 01: Introducción al Desarrollo EMIC**
-
-**Archivo de Salida:** `Seccion_1_Introduccion/01_Introduccion.md`
-
-**Prompt para Claude Code:**
-
-```
-Crea el Capítulo 01 "Introducción al Desarrollo EMIC" del Manual de Desarrollo EMIC SDK.
-
-CONTEXTO:
-- Este capítulo introduce a los desarrolladores al ecosistema EMIC
-- Explica el propósito del manual y el enfoque del desarrollo modular
-
-REFERENCIAS DE ARCHIVOS:
-- @00_Portada.md (capítulo previo)
-- @INFO/EMIC(Introduccion).md
-- @INFO/EMIC.md
-- @INFO/DiagramaEMIC.jpg
-- @INFO/Arquitectura_EMIC.jpg
-- @EMIC_Developer_Manual_V2.1.md
-
-CONTENIDO REQUERIDO:
-1. ¿Qué es EMIC? (resumen ejecutivo)
-2. ¿Para quién es este manual?
-   - Perfil del desarrollador de recursos
-   - Perfil del integrador (diferencia)
-3. Objetivos del manual
-4. Requisitos previos:
-   - Conocimientos de C
-   - Microcontroladores embebidos (PIC, ARM, AVR, etc.)
-   - Conceptos de sistemas embebidos
-5. Filosofía EMIC:
-   - Modularidad
-   - Colaboración
-   - Reutilización
-   - Estandarización
-6. Flujo general del ecosistema EMIC:
-   - Desarrollador crea EMIC-Libraries
-   - EMIC Discovery extrae recursos
-   - Integrador crea script en EMIC-Editor
-   - EMIC Generate fusiona Libraries + Script
-   - Resultado: código C compilable
-7. Roles en el ecosistema:
-   - Desarrollador (bajo nivel)
-   - Integrador (alto nivel)
-   - Comunidad EMIC
-
-GRÁFICOS A INCLUIR:
-- Diagrama del flujo completo (basado en DiagramaEMIC.jpg)
-- Ilustración de roles Desarrollador vs Integrador
-- Timeline del proceso de desarrollo
-
-FORMATO:
-- Markdown con imágenes
-- Texto motivacional e inspirador
-- Ejemplos concretos
-
-SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_1_Introduccion\01_Introduccion.md
-```
-
-**Dependencias:** Cap 00
-
----
-
-#### **CAPÍTULO 02: Arquitectura y Conceptos Fundamentales**
-
-**Archivo de Salida:** `Seccion_1_Introduccion/02_Arquitectura.md`
-
-**Prompt para Claude Code:**
-
-```
-Crea el Capítulo 02 "Arquitectura y Conceptos Fundamentales" del Manual de Desarrollo EMIC SDK.
-
-CONTEXTO:
-- Explica la arquitectura técnica de EMIC
-- Introduce conceptos clave que se usarán en todo el manual
-
-REFERENCIAS DE ARCHIVOS:
-- @00_Portada.md
-- @01_Introduccion.md (capítulo previo)
-- @INFO/Arquitectura_EMIC.jpg
-- @INFO/DiagramaEMIC.jpg
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md (secciones de arquitectura)
-- @EMIC_Developer_Manual_V2.1.md
-
-CONTENIDO REQUERIDO:
-1. Arquitectura del sistema EMIC
-2. Los 4 procesos clave:
-   - **EMIC Discovery**: Extracción de recursos
-   - **EMIC Editor**: Creación de scripts
-   - **EMIC Generate**: Fusión de código
-   - **EMIC Compiler**: Compilación final
-3. Volúmenes lógicos:
-   - `DEV:` - EMIC SDK
-   - `TARGET:` - Código generado
-   - `SYS:` - Configuración
-   - `USER:` - Archivos del usuario
-4. Conceptos clave:
-   - **EMIC SDK**: Repositorio de componentes (antes "Repositorio EMIC")
-   - **EMIC-Libraries**: Código C con anotaciones
-   - **EMIC-Codify**: Lenguaje de gestión de código
-   - **EMIC-Module**: Hardware + Firmware
-   - **Tags**: Etiquetas de publicación
-   - **Macros**: Variables de texto
-5. Flujo de datos:
-   - SOURCE Documents → Discovery → Editor
-   - Script → Transcriptor → Intermediate Document
-   - Intermediate + Libraries → Merge → TARGET Documents
-   - TARGET → Compiler → FINAL Documents
-
-GRÁFICOS A INCLUIR:
-- Diagrama de arquitectura completo (basado en Arquitectura_EMIC.jpg)
-- Diagrama de volúmenes lógicos
-- Flowchart del flujo de datos
-- Diagrama de componentes y sus relaciones
-
-FORMATO:
-- Markdown técnico con diagramas
-- Tablas comparativas
-- Ejemplos de rutas con volúmenes lógicos
-
-SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_1_Introduccion\02_Arquitectura.md
-```
-
-**Dependencias:** Cap 00, 01
 
 ---
 
@@ -328,91 +44,42 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 03 "Glosario y Vocabulario EMIC" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Diccionario completo de términos EMIC
-- Referencia rápida para desarrolladores
-- Debe ser exhaustivo pero conciso
+- Definición clara de los términos únicos del ecosistema EMIC.
+- Debe servir como referencia constante.
+- Basado en los conceptos de Arquitectura.
 
-REFERENCIAS DE ARCHIVOS:
-- @01_Introduccion.md
-- @02_Arquitectura.md (capítulo previo)
+REFERENCIAS:
+- @Seccion_1_Introduccion/02_Arquitectura.md
 - @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
-- @EMIC.md
-- @EMIC_Developer_Manual_V2.1.md
 
 CONTENIDO REQUERIDO:
-Términos ordenados alfabéticamente (al menos estos):
-
-**A**
-- API (en contexto EMIC)
-- Alias (en etiquetado)
-
-**D**
-- Desarrollador (rol)
-- DEV: (volumen)
-- Discovery (proceso)
-- Driver (componente)
-
-**E**
-- EMIC-Codify
-- EMIC-Generate
-- EMIC-Libraries
-- EMIC-Module
-- EMIC SDK
-- EMIC-Editor
-- Evento (callback)
-- Etiqueta (Tag)
-
-**G**
-- generate.emic
-- Grupo (de macros)
-
-**H**
-- HAL (Hardware Abstraction Layer)
-
-**I**
-- Integrador (rol)
-
-**M**
-- Macro
-- Módulo
-
-**S**
-- SYS: (volumen)
-- SDK
-
-**T**
-- TAG
-- TARGET: (volumen)
-
-**U**
-- USER: (volumen)
-
-**V**
-- Volumen lógico
-
-Cada término debe incluir:
-1. Definición clara
-2. Contexto de uso
-3. Ejemplos si aplica
-4. Referencias cruzadas a otros términos relacionados
-
-FORMATO:
-- Markdown con anchors navegables
-- Tabla al inicio con índice alfabético
-- Sección por cada letra
-- Referencias cruzadas con links
+1. Definiciones Clave:
+   - EMIC (Ecosistema)
+   - SDK (La carpeta raíz)
+   - API (Application Programming Interface en contexto EMIC)
+   - Driver (Controlador de bajo nivel)
+   - HAL (Hardware Abstraction Layer)
+   - Módulo (Unidad funcional Hard+Soft)
+   - EMIC-Codify (Lenguaje de scripting)
+   - Tags (Etiquetas de descubrimiento)
+   - Discovery, Transcriptor, Merge, Compiler (Los 4 procesos)
+2. Términos de Archivos:
+   - .emic, .c, .h, .json
+3. Términos de Volúmenes:
+   - DEV:, TARGET:, SYS:, USER:
+4. Tabla de acrónimos comunes (GPIO, I2C, UART, etc. en contexto EMIC)
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_1_Introduccion\03_Glosario.md
 ```
 
-**Dependencias:** Cap 01, 02
+**Dependencias:** Cap 02
 
 ---
 
 #### **CAPÍTULO 04: Ventajas de EMIC vs Otros Métodos**
 
-**Archivo de Salida:** `Seccion_1_Introduccion/04_Ventajas.md`
+**Archivo de Salida:** `Seccion_1_Introduccion/04_Ventajas_EMIC.md`
 
 **Prompt para Claude Code:**
 
@@ -420,75 +87,29 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 04 "Ventajas de EMIC vs Otros Métodos" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Comparación con métodos tradicionales
-- Justificación del uso de EMIC
-- Casos de uso ideales
+- Comparativa técnica y filosófica.
+- Por qué un desarrollador debería usar EMIC en lugar de Baremetal puro o Arduino/HALs genéricas.
 
-REFERENCIAS DE ARCHIVOS:
-- @01_Introduccion.md
-- @02_Arquitectura.md
-- @03_Glosario.md (capítulo previo)
-- @INFO/EMIC.md (secciones de propuesta de valor y mercado)
-- @INFO/EMIC(Introduccion).md (ventajas)
+REFERENCIAS:
+- @Seccion_1_Introduccion/01_Introduccion.md
 
 CONTENIDO REQUERIDO:
-1. Problemas del desarrollo tradicional:
-   - Repetición de código
-   - Falta de estandarización
-   - Tiempo de desarrollo elevado
-   - Dificultad de colaboración
-   - Curva de aprendizaje empinada
-
-2. EMIC vs Desarrollo desde cero:
-   - Reutilización vs desarrollo ad-hoc
-   - Tiempo de time-to-market
-   - Calidad y testing
-
-3. EMIC vs Frameworks existentes:
-   - Vs Arduino/mbed/Zephyr
-   - Vs PlatformIO
-   - Vs Bare Metal tradicional
-
-4. EMIC vs Low-code platforms genéricas
-
-5. Tabla comparativa de características:
-   - Reutilización de código
-   - Modularidad
-   - Curva de aprendizaje
-   - Flexibilidad
-   - Control de bajo nivel
-   - Comunidad
-   - Soporte de hardware
-
-6. ROI: Reducción de tiempos
-   - Desarrollo: hasta 90% más rápido
-   - Mantenimiento
-   - Escalabilidad
-
-7. Casos de uso ideales:
-   - IIoT industrial
-   - Sensores distribuidos
-   - Control embebido
-   - Comunicación M2M
-
-8. Beneficios de la colaboración comunitaria
-
-GRÁFICOS A INCLUIR:
-- Tabla comparativa visual (EMIC vs otros)
-- Gráfico de reducción de tiempo
-- Diagrama de reutilización de código
-- ROI timeline
-
-FORMATO:
-- Markdown persuasivo
-- Tablas comparativas
-- Gráficos de datos
+1. Tabla Comparativa: EMIC vs Baremetal vs Arduino vs Vendor SDKs (Harmony/CodeConfigurator)
+2. Ventajas para el Desarrollador:
+   - Reutilización real (Write once, use many)
+   - Estandarización de drivers
+   - Documentación autogenerada (Tags)
+3. Ventajas para el Integrador (Cliente del desarrollador):
+   - Facilidad de uso (Drag & Drop)
+   - Abstracción de hardware compleja
+4. Análisis de ROI (Retorno de Inversión) en tiempo de desarrollo
+5. El valor de la comunidad y el ecosistema compartido
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_1_Introduccion\04_Ventajas.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_1_Introduccion\04_Ventajas_EMIC.md
 ```
 
-**Dependencias:** Cap 01, 02, 03
+**Dependencias:** Cap 03
 
 ---
 
@@ -496,84 +117,35 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 
 ---
 
-#### **CAPÍTULO 05: Anatomía de un EMIC SDK - Visión General**
+#### **CAPÍTULO 05: Anatomía de un EMIC SDK (Visión General)**
 
 **Archivo de Salida:** `Seccion_2_Estructura_SDK/05_Vision_General_SDK.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 05 "Anatomía de un EMIC SDK - Visión General" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 05 "Anatomía de un EMIC SDK (Visión General)" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Primera visión de la estructura completa del SDK
-- Introduce todas las carpetas y su propósito
-- Base para los siguientes capítulos detallados
+- Mapa general de las carpetas del SDK.
+- Primera inmersión en la estructura de archivos.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_1_Introduccion/01_Introduccion.md
-- @Seccion_1_Introduccion/02_Arquitectura.md
-- @Seccion_1_Introduccion/03_Glosario.md
-- @Seccion_1_Introduccion/04_Ventajas.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md (sección "Organización del EMIC SDK")
-
-REFERENCIAS DEL SDK REAL:
-- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\
-- Listar contenido de cada carpeta principal
+REFERENCIAS:
+- Explorar carpeta raíz del SDK: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M
 
 CONTENIDO REQUERIDO:
-1. ¿Qué es un EMIC SDK?
-   - Diferencia con "Repositorio EMIC" (término antiguo)
-   - SDK = Software Development Kit completo
-   - Contiene todos los recursos necesarios
-
-2. Estructura completa de carpetas:
-   ```
-   EMIC_SDK/
-   ├── _modules/      ← Módulos (Hardware + Firmware)
-   ├── _api/          ← APIs de alto nivel
-   ├── _drivers/      ← Drivers de hardware
-   ├── _hal/          ← Hardware Abstraction Layer
-   ├── _hard/         ← Código específico de MCU
-   ├── _main/         ← Punto de entrada (main.c)
-   ├── _pcb/          ← Configuración de PCBs
-   ├── _templates/    ← Templates de proyectos
-   ├── _system/       ← Sistema core EMIC
-   └── _util/         ← Utilidades generales
-   ```
-
-3. Propósito de cada carpeta (resumen breve):
-   - Cada carpeta tendrá su capítulo detallado
-
-4. Convenciones de nombres:
-   - Prefijo underscore (_) para carpetas del sistema
-   - CamelCase o snake_case según tipo
-
-5. Flujo de dependencias:
-   - Diagrama de capas de abstracción
-   - `_util` → `_api` → `_drivers` → `_hal` → `_hard`
-
-6. Estadísticas del SDK real:
-   - Cantidad de APIs disponibles
-   - Cantidad de Drivers
-   - Cantidad de Módulos
-   - Categorías de módulos
-
-GRÁFICOS A INCLUIR:
-- Árbol de directorios visual
-- Diagrama de capas de abstracción
-- Flowchart de dependencias
-
-FORMATO:
-- Markdown con árbol de directorios ASCII art
-- Tablas de resumen
-- Enlaces a capítulos detallados
+1. Estructura de Directorios (Árbol ASCII)
+2. Descripción breve de cada carpeta raíz:
+   - _api, _drivers, _hal, _hard, _main, _modules, _pcb, _system, _templates, _util
+3. Flujo de dependencias entre carpetas (quién incluye a quién)
+4. Convenciones de nombres de archivos y carpetas
+5. Ubicación de archivos de configuración (.json)
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\05_Vision_General_SDK.md
 ```
 
-**Dependencias:** Cap 01, 02, 03, 04
+**Dependencias:** Cap 04
 
 ---
 
@@ -587,88 +159,18 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 06 "Carpeta _modules/ - Módulos Hardware + Firmware" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Detalle completo de la carpeta _modules/
-- Explica qué es un módulo EMIC
-- Muestra ejemplos reales del SDK
+- La unidad principal de funcionalidad.
+- Donde viven los proyectos funcionales.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/05_Vision_General_SDK.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
-- @Guía para la Creación de Módulos en EMIC.md
-- @EMIC_Module_Debugging_Guide_for_AI.md
-
-REFERENCIAS DEL SDK REAL:
-- Listar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_modules\
-- Explorar categorías disponibles:
-  - Actuators/
-  - Development_Board/
-  - Digital_In_Out/
-  - Displays_seven_segments/
-  - Graphic_Displays/
-  - Indoor_Crops/
-  - Oil_and_Gas/
-  - Power_Supply/
-  - Sensors/
-  - Storage/
-  - Testing/
-  - Wired_Communication/
-  - Wired_Control/
-  - Wireless_Communication/
-- Elegir 2-3 módulos como ejemplo (diferentes categorías)
+REFERENCIAS:
+- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_modules
 
 CONTENIDO REQUERIDO:
-1. ¿Qué es un Módulo EMIC?
-   - Módulo = Hardware + Firmware + Configuración
-   - Unidad funcional completa
-
-2. Estructura de la carpeta _modules/:
-   ```
-   _modules/
-   └── {Category}/
-       └── {ModuleName}/
-           ├── System/
-           │   ├── generate.emic
-           │   ├── deploy.emic
-           │   ├── config.json
-           │   ├── module.json
-           │   └── program.xml
-           ├── Target/
-           └── m_description.json
-   ```
-
-3. Categorías de módulos (listar todas las reales)
-
-4. Contenido de cada subcarpeta:
-   - **System/**: Archivos de configuración
-   - **Target/**: Código generado (output)
-
-5. Archivos clave:
-   - `generate.emic`: Script de generación
-   - `deploy.emic`: Script de deployment
-   - `config.json`: Configuración dinámica
-   - `module.json`: Metadata del módulo
-   - `m_description.json`: Descripción
-   - `program.xml`: Código visual del integrador
-
-6. Ejemplos reales del SDK:
-   - Analizar estructura de 2-3 módulos reales
-   - Mostrar contenido de sus archivos clave
-
-7. Flujo de vida de un módulo:
-   - Creación
-   - Configuración
-   - Instanciación en proyecto
-   - Generación de código
-
-GRÁFICOS A INCLUIR:
-- Árbol de estructura de módulo
-- Diagrama de archivos y su propósito
-- Flowchart del flujo de generación
-
-FORMATO:
-- Markdown con ejemplos de código real
-- Árboles de directorios
-- Tablas de metadatos
+1. Propósito de `_modules`
+2. Estructura interna de un módulo (System/Target/Hardware)
+3. Archivos clave: generate.emic, config.json, module.json
+4. Categorización (Actuators, Sensors, Comm, etc.)
+5. Ejemplo de contenido de un módulo simple
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\06_Carpeta_Modules.md
@@ -688,107 +190,25 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 07 "Carpeta _api/ - APIs de Alto Nivel" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Detalle de la carpeta _api/
-- Qué es una API en EMIC
-- Ejemplos reales del SDK
+- Bibliotecas reutilizables de lógica de aplicación.
+- Abstracción pura.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/05_Vision_General_SDK.md
-- @Seccion_2_Estructura_SDK/06_Carpeta_Modules.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md (sección de APIs)
-
-REFERENCIAS DEL SDK REAL:
-- Listar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_api\
-- Categorías disponibles:
-  - Actuators/
-  - ADC/
-  - Alarm/
-  - Audio/
-  - Custom/
-  - Development_Board/
-  - ExternalFIFO_RAM/
-  - Indicators/
-  - Inputs/
-  - Oil_Gas/
-  - Power/
-  - Protocols/
-  - Sensors/
-  - Storage/
-  - System/
-  - Timers/
-  - Wired_Communication/
-  - Wireless/
-- Analizar 3-4 APIs como ejemplo:
-  - Indicators/LEDs/ (ejemplo simple)
-  - Timers/ (ejemplo común)
-  - Wired_Communication/ (ejemplo complejo)
+REFERENCIAS:
+- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_api
 
 CONTENIDO REQUERIDO:
-1. ¿Qué es una API en EMIC?
-   - Abstracción de alto nivel
-   - Oculta complejidad del hardware
-   - Reutilizable en múltiples módulos
-
-2. Diferencia entre API y Driver:
-   - API = alto nivel, independiente de hardware específico
-   - Driver = bajo nivel, hardware específico
-
-3. Estructura de una API:
-   ```
-   _api/{Category}/{APIName}/
-   ├── {APIName}.emic
-   ├── inc/
-   │   └── *.h
-   └── src/
-       └── *.c
-   ```
-
-4. Contenido del archivo .emic:
-   - Definición de recursos
-   - Dependencias
-   - Parámetros configurables
-
-5. Categorías de APIs (listar todas)
-
-6. Análisis de APIs reales:
-   - **Ejemplo 1: LED API**
-     - Leer: _api/Indicators/LEDs/led.emic
-     - Mostrar estructura completa
-     - Analizar funciones publicadas
-     - Explicar dependencias
-
-   - **Ejemplo 2: Timer API**
-     - Analizar estructura
-     - Configuración de parámetros
-
-   - **Ejemplo 3: API de Comunicación**
-     - Complejidad mayor
-     - Múltiples dependencias
-
-7. Etiquetado de funciones en APIs:
-   - Tags DOXYGEN
-   - @fn, @alias, @brief, @param, @return
-
-8. Gestión de dependencias:
-   - Referencias a Drivers
-   - Referencias a HAL
-   - Referencias a otras APIs
-
-GRÁFICOS A INCLUIR:
-- Estructura de API visual
-- Diagrama de dependencias API → Driver → HAL
-- Flowchart de invocación de API
-
-FORMATO:
-- Markdown con código real de ejemplos
-- Tablas de APIs disponibles
-- Bloques de código comentados
+1. Propósito de `_api`
+2. Diferencia entre API y Driver
+3. Estructura interna (Categoría/Nombre/Archivos)
+4. Archivos típicos: .c, .h, .emic
+5. Cómo las APIs usan los Drivers
+6. Ejemplo: API de LEDs, API de Timers
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\07_Carpeta_API.md
 ```
 
-**Dependencias:** Cap 05, 06
+**Dependencias:** Cap 06
 
 ---
 
@@ -802,78 +222,24 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 08 "Carpeta _drivers/ - Drivers de Hardware" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Detalle de la carpeta _drivers/
-- Diferencia clave con APIs
-- Ejemplos del SDK real
+- Controladores de periféricos específicos pero abstraídos.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/05_Vision_General_SDK.md
-- @Seccion_2_Estructura_SDK/06_Carpeta_Modules.md
-- @Seccion_2_Estructura_SDK/07_Carpeta_API.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
-
-REFERENCIAS DEL SDK REAL:
-- Listar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_drivers\
-- Drivers disponibles:
-  - ADC/
-  - Amp/
-  - Display/
-  - I2C/
-  - RAM/
-  - SystemTimer/
-  - USB/
-- Analizar 2-3 drivers como ejemplo
+REFERENCIAS:
+- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_drivers
 
 CONTENIDO REQUERIDO:
-1. ¿Qué es un Driver en EMIC?
-   - Abstracción de hardware específico
-   - Más bajo nivel que APIs
-   - Control directo de periféricos
-
-2. API vs Driver (tabla comparativa):
-   - Nivel de abstracción
-   - Dependencias
-   - Reutilización
-   - Casos de uso
-
-3. Estructura de un Driver:
-   ```
-   _drivers/{DriverName}/
-   ├── {DriverName}.emic
-   ├── inc/
-   │   └── *.h
-   └── src/
-       └── *.c
-   ```
-
-4. Análisis de Drivers reales:
-   - **SystemTimer**: Driver fundamental
-   - **I2C**: Comunicación
-   - **Display**: Periférico complejo
-
-5. Dependencias típicas:
-   - HAL (Hardware Abstraction Layer)
-   - _hard (código específico de MCU)
-
-6. Publicación de recursos en Drivers
-
-7. Integración con APIs
-
-GRÁFICOS A INCLUIR:
-- Diagrama de capas: API → Driver → HAL → Hardware
-- Estructura de driver visual
-- Ejemplo de comunicación I2C
-
-FORMATO:
-- Markdown con ejemplos de código real
-- Diagramas de bloques
-- Comparaciones visuales
+1. Propósito de `_drivers`
+2. Relación con HAL
+3. Drivers vs Hardware directo
+4. Estructura de carpeta
+5. Ejemplo: Driver de I2C, Driver de Display 7 Seg
+6. Tags específicos para Drivers (driverName)
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\08_Carpeta_Drivers.md
 ```
 
-**Dependencias:** Cap 05, 06, 07
+**Dependencias:** Cap 07
 
 ---
 
@@ -887,75 +253,24 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 09 "Carpeta _hal/ - Hardware Abstraction Layer" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- HAL abstrae los periféricos del microcontrolador
-- Permite portabilidad entre diferentes MCUs
+- Capa crítica de portabilidad.
+- Interfaz unificada para diferentes microcontroladores.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/07_Carpeta_API.md
-- @Seccion_2_Estructura_SDK/08_Carpeta_Drivers.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
-
-REFERENCIAS DEL SDK REAL:
-- Listar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_hal\
-- Componentes HAL:
-  - ADC/
-  - Flash/
-  - GPIO/
-  - I2C/
-  - I2S/
-  - pins/
-  - PWM/
-  - RefCLK/
-  - SPI/
-  - System/
-  - Timer/
-  - UART/
-- Analizar GPIO y UART como ejemplos
+REFERENCIAS:
+- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_hal
 
 CONTENIDO REQUERIDO:
-1. ¿Qué es el HAL?
-   - Hardware Abstraction Layer
-   - Interfaz común para periféricos
-   - Portabilidad
-
-2. Propósito del HAL en EMIC:
-   - Aislar código de hardware específico
-   - Facilitar soporte multi-MCU
-   - Simplificar desarrollo de drivers
-
-3. Componentes HAL disponibles (listar todos)
-
-4. Estructura de un componente HAL:
-   - Archivos .emic
-   - Headers
-   - Implementación
-
-5. Análisis de HAL reales:
-   - **GPIO HAL**: Control de pines
-   - **UART HAL**: Comunicación serial
-   - **I2C HAL**: Bus I2C
-
-6. Relación HAL ↔ _hard:
-   - HAL define interfaz
-   - _hard implementa para MCU específico
-
-7. Uso del HAL en Drivers y APIs
-
-GRÁFICOS A INCLUIR:
-- Diagrama de abstracción: Driver → HAL → _hard → Hardware
-- Componentes HAL disponibles
-- Ejemplo de portabilidad
-
-FORMATO:
-- Markdown técnico
-- Diagramas de bloques
-- Código de ejemplo
+1. ¿Qué es el HAL en EMIC?
+2. Por qué es vital para la reutilización
+3. Estructura de carpetas por periférico (GPIO, ADC, UART)
+4. Cómo un Driver invoca al HAL
+5. Cómo el HAL se mapea al hardware real (_hard)
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\09_Carpeta_HAL.md
 ```
 
-**Dependencias:** Cap 07, 08
+**Dependencias:** Cap 08
 
 ---
 
@@ -969,47 +284,24 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 10 "Carpeta _hard/ - Código Específico de MCU" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- _hard contiene implementaciones específicas por microcontrolador
-- Nivel más bajo de la pila de abstracción
+- La capa más baja.
+- Acceso directo a registros del microcontrolador.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/08_Carpeta_Drivers.md
-- @Seccion_2_Estructura_SDK/09_Carpeta_HAL.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
-
-REFERENCIAS DEL SDK REAL:
-- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_hard\
-- Analizar estructura
+REFERENCIAS:
+- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_hard
 
 CONTENIDO REQUERIDO:
-1. ¿Qué es _hard?
-   - Código dependiente de MCU
-   - Registros específicos
-   - Configuraciones de hardware
-
-2. Organización por familia de MCU:
-   - PIC16F
-   - PIC18F
-   - PIC24F
-   - dsPIC33
-   - etc.
-
-3. Contenido típico:
-   - Configuración de registros
-   - Inicialización de periféricos
-   - Funciones de bajo nivel
-
-4. Relación con HAL:
-   - HAL define interfaz
-   - _hard la implementa
-
-5. Ejemplos de código específico
+1. Propósito de `_hard`
+2. Organización por Familia/Modelo de MCU (PIC18, PIC32, AVR)
+3. Archivos headers de registros (xc.h, p24xxxx.h)
+4. Implementación de funciones HAL
+5. Interrupciones y vectores
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\10_Carpeta_Hard.md
 ```
 
-**Dependencias:** Cap 08, 09
+**Dependencias:** Cap 09
 
 ---
 
@@ -1023,32 +315,24 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 11 "Carpeta _main/ - Punto de Entrada" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- _main contiene el main.c y lógica de inicialización
-- Baremetal vs RTOS
+- El bucle principal y la inicialización del sistema.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/05_Vision_General_SDK.md
-- @Seccion_2_Estructura_SDK/06_Carpeta_Modules.md
-- @Seccion_2_Estructura_SDK/10_Carpeta_Hard.md (capítulo previo)
-
-REFERENCIAS DEL SDK REAL:
-- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_main\
-- Analizar main.emic disponibles
+REFERENCIAS:
+- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_main
 
 CONTENIDO REQUERIDO:
-1. Propósito de _main
-2. Estructura del main.c generado
-3. Inicialización de drivers
-4. Loop principal
-5. Gestión de eventos
-6. Baremetal vs RTOS
-7. Ejemplo de main.emic
+1. Propósito de `_main`
+2. main.c: Estructura estándar
+3. Inicialización de sistema, drivers y aplicación
+4. El Super-Loop (while(1))
+5. Inyección de código de usuario en el main (Call_Init, Call_Main)
+6. main.emic: Cómo se gestiona la generación del main
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\11_Carpeta_Main.md
 ```
 
-**Dependencias:** Cap 05, 06, 10
+**Dependencias:** Cap 10
 
 ---
 
@@ -1062,31 +346,24 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 12 "Carpeta _pcb/ - Configuración de Hardware" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- _pcb define configuraciones de PCBs
-- Mapping de pines
-- Configuraciones específicas de hardware
+- Abstracción de la placa física.
+- Mapeo de pines lógicos a físicos.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/06_Carpeta_Modules.md
-- @Seccion_2_Estructura_SDK/11_Carpeta_Main.md (capítulo previo)
-
-REFERENCIAS DEL SDK REAL:
-- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_pcb\
-- Analizar archivos pcb.emic
+REFERENCIAS:
+- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_pcb
 
 CONTENIDO REQUERIDO:
-1. Propósito de _pcb
-2. Archivo pcb.emic
-3. Definición de pines
-4. Configuración de periféricos
-5. Múltiples versiones de PCB
-6. Ejemplo real
+1. Propósito de `_pcb`
+2. Archivo pcb.emic: Definición de pines y recursos
+3. Mapeo de Alias de pines (Led1 -> RA0)
+4. Configuración de Clock y Fusibles
+5. Cambiar de PCB sin cambiar de código de aplicación
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\12_Carpeta_PCB.md
 ```
 
-**Dependencias:** Cap 06, 11
+**Dependencias:** Cap 11
 
 ---
 
@@ -1100,29 +377,23 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 13 "Carpeta _templates/ - Templates de Proyectos" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- _templates contiene plantillas de proyectos para IDEs
-- MPLAB X principalmente
+- Plantillas para IDEs (MPLAB X).
+- Base para la compilación.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/05_Vision_General_SDK.md
-- @Seccion_2_Estructura_SDK/12_Carpeta_PCB.md (capítulo previo)
-
-REFERENCIAS DEL SDK REAL:
-- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_templates\
-- Analizar templates disponibles
+REFERENCIAS:
+- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_templates
 
 CONTENIDO REQUERIDO:
-1. Propósito de _templates
-2. Templates para MPLAB X
-3. Configuración de proyecto
-4. Makefiles
-5. Cómo se integran en generate.emic
+1. Propósito de `_templates`
+2. Estructura de un proyecto MPLAB X template
+3. Makefile y configuraciones de compilador
+4. Cómo EMIC Generate usa estos templates para crear el proyecto final TARGET
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\13_Carpeta_Templates.md
 ```
 
-**Dependencias:** Cap 05, 12
+**Dependencias:** Cap 12
 
 ---
 
@@ -1136,28 +407,23 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 14 "Carpeta _system/ - Sistema Core EMIC" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- _system contiene funciones core del sistema EMIC
-- Conversiones de tipos
-- Includes necesarios
+- Funciones internas del sistema EMIC.
+- Gestión de tipos y definiciones globales.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/05_Vision_General_SDK.md
-- @Seccion_2_Estructura_SDK/13_Carpeta_Templates.md (capítulo previo)
-
-REFERENCIAS DEL SDK REAL:
-- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_system\
+REFERENCIAS:
+- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_system
 
 CONTENIDO REQUERIDO:
-1. Propósito de _system
-2. Conversiones de tipos de datos
-3. Includes fundamentales
-4. Funciones de sistema
+1. Propósito de `_system`
+2. typedefs estándar (uint8_t, etc.)
+3. headers globales de inclusión
+4. Funciones de sistema (Reset, Delay, etc.)
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\14_Carpeta_System.md
 ```
 
-**Dependencias:** Cap 05, 13
+**Dependencias:** Cap 13
 
 ---
 
@@ -1171,295 +437,199 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 15 "Carpeta _util/ - Utilidades Generales" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- _util contiene funciones de uso general
-- Independiente de hardware
-- Operadores matemáticos, lógicos, strings, etc.
+- Librerías de ayuda agnósticas al hardware.
 
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/05_Vision_General_SDK.md
-- @Seccion_2_Estructura_SDK/07_Carpeta_API.md
-- @Seccion_2_Estructura_SDK/14_Carpeta_System.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
-
-REFERENCIAS DEL SDK REAL:
-- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_util\
+REFERENCIAS:
+- Explorar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_util
 
 CONTENIDO REQUERIDO:
-1. Propósito de _util
-2. Tipos de utilidades:
-   - Operadores matemáticos
-   - Operadores lógicos
-   - Operadores de strings
-   - Control de flujo
-3. Independencia de hardware
-4. Ejemplos de utilidades comunes
+1. Propósito de `_util`
+2. Librerías matemáticas, de string, buffers circulares, etc.
+3. Cómo usarlas en tus APIs y Drivers
+4. Indepencia total del hardware
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_2_Estructura_SDK\15_Carpeta_Util.md
 ```
 
-**Dependencias:** Cap 05, 07, 14
+**Dependencias:** Cap 14
+
+### SECCIÓN 3: EMIC-CODIFY PARA DESARROLLADORES
 
 ---
 
-### SECCIÓN 3: EMIC-CODIFY
+#### **CAPÍTULO 16: Fundamentos de EMIC-Codify para Desarrollo**
 
----
-
-#### **CAPÍTULO 16: Fundamentos de EMIC-Codify**
-
-**Archivo de Salida:** `Seccion_3_EMIC_Codify/16_Fundamentos_Codify.md`
+**Archivo de Salida:** `Seccion_3_EMIC_Codify/16_Fundamentos_Codify_Desarrollo.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 16 "Fundamentos de EMIC-Codify" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 16 "Fundamentos de EMIC-Codify para Desarrollo" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
 - Introducción al lenguaje EMIC-Codify
-- Base para todos los comandos
+- Enfoque específico en CREAR recursos (Desarrollador) vs integrar (Integrador)
+- Primeros pasos para crear una API
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_1_Introduccion/02_Arquitectura.md
 - @Seccion_2_Estructura_SDK/15_Carpeta_Util.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md (sección "EMIC Codify")
+- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
 
 CONTENIDO REQUERIDO:
-1. ¿Qué es EMIC-Codify?
-2. Propósito y filosofía
-3. Comandos vs Etiquetas (Tags)
-4. Sintaxis general
-5. Volúmenes lógicos (DEV:, TARGET:, SYS:, USER:)
-6. Conceptos de macros
-7. Flujo de procesamiento
-8. Primer ejemplo simple
+1. ¿Qué es EMIC-Codify? (Breve repaso)
+2. Sintaxis básica
+3. Diferencia clave: Codify para Integrar vs Codify para Desarrollar
+4. Primer archivo .emic para una API simple
+5. Tags básicos de publicación: @fn, @alias, @brief
+6. Ejemplo completo: API simple con su archivo .emic
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_3_EMIC_Codify\16_Fundamentos_Codify.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_3_EMIC_Codify\16_Fundamentos_Codify_Desarrollo.md
 ```
 
-**Dependencias:** Cap 02, 15
+**Dependencias:** Cap 15
 
 ---
 
-#### **CAPÍTULO 17: Comandos EMIC-Codify - Parte 1: Gestión de Archivos**
+#### **CAPÍTULO 17: Comandos de Gestión de Archivos y Recursos**
 
-**Archivo de Salida:** `Seccion_3_EMIC_Codify/17_Comandos_Archivos.md`
+**Archivo de Salida:** `Seccion_3_EMIC_Codify/17_Comandos_Gestion_Archivos.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 17 "Comandos EMIC-Codify (Parte 1: Gestión de Archivos)" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 17 "Comandos de Gestión de Archivos y Recursos" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Comandos para manipulación de archivos
-- setInput, setOutput, restoreOutput, copy
+- Comandos fundamentales para manipular archivos en el SDK
+- Uso de copy, setInput, setOutput
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_3_EMIC_Codify/16_Fundamentos_Codify.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md (sección de comandos)
+- @Seccion_3_EMIC_Codify/16_Fundamentos_Codify_Desarrollo.md (capítulo previo)
+- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
 
 CONTENIDO REQUERIDO:
-1. Comando setInput:
-   - Sintaxis
-   - Parámetros
-   - Ejemplos
-
-2. Comando setOutput:
-   - Sintaxis
-   - Parámetros
-   - Stack de outputs
-
-3. Comando restoreOutput:
-   - Uso
-   - Gestión de stack
-
-4. Comando copy:
-   - Sintaxis completa
-   - Parámetros con macros
-   - Ejemplos prácticos
-
-5. Ejemplos del SDK real
+1. Comando copy: Uso en APIs reales
+2. Comando setOutput: Estructurar archivos generados
+3. Comando setInput: Procesar código fuente
+4. Caso práctico: Crear archivo .emic para copiar .c y .h
+5. Ejemplo completo del SDK: Analizar led.emic línea por línea
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_3_EMIC_Codify\17_Comandos_Archivos.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_3_EMIC_Codify\17_Comandos_Gestion_Archivos.md
 ```
 
 **Dependencias:** Cap 16
 
 ---
 
-#### **CAPÍTULO 18: Comandos EMIC-Codify - Parte 2: Macros y Sustitución**
+#### **CAPÍTULO 18: Sistema de Macros y Sustitución**
 
-**Archivo de Salida:** `Seccion_3_EMIC_Codify/18_Comandos_Macros.md`
+**Archivo de Salida:** `Seccion_3_EMIC_Codify/18_Sistema_Macros_Sustitucion.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 18 "Comandos EMIC-Codify (Parte 2: Macros y Sustitución)" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 18 "Sistema de Macros y Sustitución" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Comandos para definir y usar macros
-- define, unDefine, sustitución .{key}.
+- Uso de macros para parametrizar recursos
+- Configuración flexible de APIs y Drivers
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_3_EMIC_Codify/16_Fundamentos_Codify.md
-- @Seccion_3_EMIC_Codify/17_Comandos_Archivos.md (capítulo previo)
+- @Seccion_3_EMIC_Codify/17_Comandos_Gestion_Archivos.md (capítulo previo)
 - @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
 
 CONTENIDO REQUERIDO:
-1. Comando define:
-   - Sintaxis
-   - Grupos de macros
-   - Ejemplos
-
-2. Comando unDefine:
-   - Borrado de macros
-
-3. Sustitución .{key}.:
-   - Sintaxis
-   - Grupos (local, global)
-   - Búsqueda jerárquica
-
-4. Comando foreach:
-   - Iteración sobre grupos
-   - Uso de .{Item}.
-
-5. Sustitución .{group.*}.:
-   - Expansión de grupos completos
-
-6. Ejemplos prácticos del SDK
+1. Comando define: Creación de macros
+2. Sustitución .{key}.: Sintaxis y uso
+3. Macros para parámetros de configuración de APIs
+4. Ejemplo: API con parámetros configurables
+5. Uso de foreach para recursos múltiples
+6. Caso práctico: Driver configurable con macros
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_3_EMIC_Codify\18_Comandos_Macros.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_3_EMIC_Codify\18_Sistema_Macros_Sustitucion.md
 ```
 
-**Dependencias:** Cap 16, 17
+**Dependencias:** Cap 17
 
 ---
 
-#### **CAPÍTULO 19: Comandos EMIC-Codify - Parte 3: Control de Flujo**
+#### **CAPÍTULO 19: Control de Flujo y Condicionales**
 
-**Archivo de Salida:** `Seccion_3_EMIC_Codify/19_Comandos_Control.md`
+**Archivo de Salida:** `Seccion_3_EMIC_Codify/19_Control_Flujo_Condicionales.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 19 "Comandos EMIC-Codify (Parte 3: Control de Flujo)" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 19 "Control de Flujo y Condicionales" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Comandos condicionales
-- if, elif, else, endif, ifdef, ifndef
+- Lógica condicional en la generación de código
+- Adaptación a diferentes hardwares o configuraciones
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_3_EMIC_Codify/16_Fundamentos_Codify.md
-- @Seccion_3_EMIC_Codify/18_Comandos_Macros.md (capítulo previo)
+- @Seccion_3_EMIC_Codify/18_Sistema_Macros_Sustitucion.md (capítulo previo)
 - @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
 
 CONTENIDO REQUERIDO:
-1. Comando if:
-   - Sintaxis
-   - Condiciones
-   - Bloques
-
-2. Comandos elif y else
-
-3. Comando endif
-
-4. Comando ifdef:
-   - Verificar si macro está definida
-
-5. Comando ifndef:
-   - Verificar si macro NO está definida
-
-6. Ejemplos de uso en generate.emic del SDK
+1. Comandos if / elif / else / endif
+2. Comandos ifdef / ifndef
+3. Generación condicional de código según configuración
+4. Ejemplo: API con funcionalidad opcional
+5. Caso práctico: Driver con soporte multi-MCU condicional
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_3_EMIC_Codify\19_Comandos_Control.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_3_EMIC_Codify\19_Control_Flujo_Condicionales.md
 ```
 
-**Dependencias:** Cap 16, 18
+**Dependencias:** Cap 18
 
 ---
 
-#### **CAPÍTULO 20: Etiquetado de Recursos (Tags)**
+#### **CAPÍTULO 20: Etiquetado de Recursos (Tags DOXYGEN y JSON)**
 
-**Archivo de Salida:** `Seccion_3_EMIC_Codify/20_Etiquetado_Recursos.md`
+**Archivo de Salida:** `Seccion_3_EMIC_Codify/20_Etiquetado_Recursos_Tags.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 20 "Etiquetado de Recursos (Tags)" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 20 "Etiquetado de Recursos (Tags DOXYGEN y JSON)" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Tags para publicar recursos en EMIC Discovery
-- Diferencia entre Tags y Macros
-- Formato DOXYGEN y JSON
+- Publicación de recursos para EMIC Discovery
+- Tags DOXYGEN para funciones y JSON para configuración
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_3_EMIC_Codify/16_Fundamentos_Codify.md
-- @Seccion_3_EMIC_Codify/17_Comandos_Archivos.md
-- @Seccion_3_EMIC_Codify/19_Comandos_Control.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md (sección "Tags EMIC Codify")
-- @Seccion_2_Estructura_SDK/07_Carpeta_API.md
-
-REFERENCIAS DEL SDK REAL:
-- Analizar tags en APIs: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_api\
-- Ejemplo: _api/Indicators/LEDs/
+- @Seccion_3_EMIC_Codify/19_Control_Flujo_Condicionales.md (capítulo previo)
+- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
 
 CONTENIDO REQUERIDO:
-1. ¿Qué son los Tags?
-   - Diferencia con Macros
-   - Propósito: publicación en Discovery
-
-2. Tag driverName:
-   - EMIC:tag(driverName = xxx)
-   - Agrupación de recursos
-
-3. Etiquetado de funciones (formato DOXYGEN):
-   - @fn: Firma de función
-   - @alias: Nombre en editor
-   - @brief: Descripción
-   - @param: Parámetros
-   - @return: Valor de retorno
-   - Ejemplo completo
-
-4. Etiquetado de eventos:
-   - extern en @fn
-   - Callbacks
-
-5. Etiquetado de variables:
-   - Formato inline
-   - /**<Alias:xxx> Descripción */
-
-6. Funciones variádicas:
-   - Parámetros concat
-   - Ejemplo con formato "..."
-
-7. Formato JSON para recursos especiales:
-   - EMIC:json(type = Configurator)
-   - Menús de configuración
-   - Ejemplo completo
-
-8. Ejemplos reales del SDK:
-   - Analizar LED API
-   - Analizar Timer API
+1. ¿Qué son los Tags en EMIC? Diferencia con Macros
+2. Tags DOXYGEN para funciones: @fn, @alias, @brief, @param, @return
+3. Tags para eventos (callbacks)
+4. Tags para variables
+5. Tag driverName para agrupar recursos
+6. Formato JSON para Configurators
+7. Ejemplos reales del SDK (LED API, Timer API)
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_3_EMIC_Codify\20_Etiquetado_Recursos.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_3_EMIC_Codify\20_Etiquetado_Recursos_Tags.md
 ```
 
-**Dependencias:** Cap 16, 17, 19, Cap 07 (Carpeta API)
+**Dependencias:** Cap 19
 
 ---
 
-### SECCIÓN 4: DESARROLLO PRÁCTICO
+### SECCIÓN 4: DESARROLLO DE COMPONENTES SDK
 
 ---
 
 #### **CAPÍTULO 21: Desarrollo de una API EMIC - Paso a Paso**
 
-**Archivo de Salida:** `Seccion_4_Desarrollo/21_Desarrollo_API.md`
+**Archivo de Salida:** `Seccion_4_Desarrollo/21_Desarrollo_API_Paso_a_Paso.md`
 
 **Prompt para Claude Code:**
 
@@ -1467,66 +637,27 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 21 "Desarrollo de una API EMIC - Paso a Paso" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Guía práctica completa para crear una API
-- Paso a paso con ejemplos
-- Usar API real del SDK como referencia
+- Guía completa para crear una nueva API
+- Ciclo: Desarrollo -> Integración -> Validación
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/07_Carpeta_API.md
-- @Seccion_3_EMIC_Codify/20_Etiquetado_Recursos.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
-- @EMIC_Developer_Manual_V2.1.md
-
-REFERENCIAS DEL SDK REAL:
-- Analizar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_api\Indicators\LEDs\
-- Usar como ejemplo completo
+- @Seccion_3_EMIC_Codify/20_Etiquetado_Recursos_Tags.md (capítulo previo)
+- Referencia SDK: _api/Indicators/LEDs/
 
 CONTENIDO REQUERIDO:
-1. ¿Cuándo crear una API?
-   - Caso de uso
-   - Diferencia con Driver
-
-2. Planificación:
-   - Definir funcionalidad
-   - Identificar dependencias
-   - Diseñar interfaz pública
-
-3. **Paso 1**: Crear estructura de carpetas
-   ```
-   _api/{Category}/{APIName}/
-   ├── {APIName}.emic
-   ├── inc/
-   └── src/
-   ```
-
-4. **Paso 2**: Escribir código C (.c y .h)
-   - Header con declaraciones
-   - Implementación
-   - Best practices
-
-5. **Paso 3**: Etiquetar recursos
-   - Tags DOXYGEN
-   - Funciones públicas
-   - Variables (si aplica)
-
-6. **Paso 4**: Crear archivo .emic
-   - Definir dependencias
-   - Comandos copy
-   - Definir macros de compilación
-
-7. **Paso 5**: Testing y validación
-   - Integrar en módulo de prueba
-   - Verificar Discovery
-
-8. **EJEMPLO COMPLETO: API de LEDs**
-   - Código completo comentado
-   - Análisis línea por línea del SDK real
+1. Planificación de la API (Funcionalidad, Interfaz)
+2. Estructura de carpetas (_api/{Category}/{Name}/)
+3. Desarrollo del Código C (Headers y Source)
+4. Etiquetado con Tags DOXYGEN
+5. Creación del archivo .emic de definición
+6. Validación mediante Integración: Crear proyecto de prueba simple
+7. Generación y Compilación para verificar
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\21_Desarrollo_API.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\21_Desarrollo_API_Paso_a_Paso.md
 ```
 
-**Dependencias:** Cap 07, Cap 20
+**Dependencias:** Cap 20
 
 ---
 
@@ -1540,39 +671,33 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 22 "Desarrollo de un Driver EMIC" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Guía para crear Drivers de hardware
-- Diferencias con APIs
-- Ejemplo real del SDK
+- Creación de Drivers de bajo nivel
+- Uso de HAL y acceso a hardware
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/08_Carpeta_Drivers.md
-- @Seccion_2_Estructura_SDK/09_Carpeta_HAL.md
-- @Seccion_4_Desarrollo/21_Desarrollo_API.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
-
-REFERENCIAS DEL SDK REAL:
-- Analizar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_drivers\
-- Elegir SystemTimer o I2C como ejemplo
+- @Seccion_4_Desarrollo/21_Desarrollo_API_Paso_a_Paso.md (capítulo previo)
+- Referencia SDK: _drivers/I2C/, _hal/I2C/
 
 CONTENIDO REQUERIDO:
-1. ¿Cuándo crear un Driver?
-2. Driver vs API (repaso)
-3. Planificación de driver
-4. Paso a paso (similar a Cap 21)
-5. Integración con HAL
-6. Ejemplo completo de driver real
+1. Diferencia Driver vs API
+2. Planificación del Driver (Periférico, HAL)
+3. Estructura de carpetas (_drivers/{Name}/)
+4. Integración con HAL (No acceder directo a registros si hay HAL)
+5. Implementación del código C y Tags
+6. Validación: Crear módulo con hardware de test
+7. Testing en hardware real
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\22_Desarrollo_Driver.md
 ```
 
-**Dependencias:** Cap 08, 09, 21
+**Dependencias:** Cap 21
 
 ---
 
 #### **CAPÍTULO 23: Desarrollo de un Módulo EMIC Completo**
 
-**Archivo de Salida:** `Seccion_4_Desarrollo/23_Desarrollo_Modulo.md`
+**Archivo de Salida:** `Seccion_4_Desarrollo/23_Desarrollo_Modulo_Completo.md`
 
 **Prompt para Claude Code:**
 
@@ -1580,244 +705,195 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 23 "Desarrollo de un Módulo EMIC Completo" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Desarrollo completo de un módulo
-- Integración de APIs y Drivers
-- Ejemplo real del SDK
+- Creación de un Módulo funcional (Hardware + Firmware)
+- Unidad de distribución principal
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/06_Carpeta_Modules.md
-- @Seccion_2_Estructura_SDK/12_Carpeta_PCB.md
-- @Seccion_4_Desarrollo/21_Desarrollo_API.md
 - @Seccion_4_Desarrollo/22_Desarrollo_Driver.md (capítulo previo)
-- @Guía para la Creación de Módulos en EMIC.md
-- @EMIC_Module_Debugging_Guide_for_AI.md
-
-REFERENCIAS DEL SDK REAL:
-- Analizar módulo real: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_modules\
-- Elegir módulo de ejemplo (Digital_In_Out o Wired_Control)
+- Referencia SDK: _modules/Digital_In_Out/
 
 CONTENIDO REQUERIDO:
-1. ¿Qué es un módulo completo?
-2. Planificación del módulo
-3. Paso 1: Crear categoría (si no existe)
-4. Paso 2: Definir hardware (PCB)
-5. Paso 3: Seleccionar APIs/Drivers
-6. Paso 4: Crear generate.emic
-7. Paso 5: Configurar hardware
-8. Paso 6: Metadata (module.json, m_description.json)
-9. Paso 7: Testing completo
-10. Ejemplo completo paso a paso
+1. Concepto de Módulo: Hardware + Firmware + Configuración
+2. Estructura de carpetas (_modules/{Category}/{Name}/)
+3. Archivos del Sistema: generate.emic, deploy.emic, config.json
+4. Archivo generate.emic: Configurar salida, cargar APIs/Drivers, pines
+5. Metadata: module.json y m_description.json
+6. Validación mediante Integración: Proyecto de prueba en EMIC-Editor
+7. Ciclo de iteración y mejora
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\23_Desarrollo_Modulo.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\23_Desarrollo_Modulo_Completo.md
 ```
 
-**Dependencias:** Cap 06, 12, 21, 22
+**Dependencias:** Cap 22
 
 ---
 
-#### **CAPÍTULO 24: Creación de Categorías de Módulos**
+#### **CAPÍTULO 24: Proceso de Generación (generate.emic) Profundo**
 
-**Archivo de Salida:** `Seccion_4_Desarrollo/24_Creacion_Categorias.md`
+**Archivo de Salida:** `Seccion_4_Desarrollo/24_Proceso_Generacion_Generate.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 24 "Creación de Categorías de Módulos" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 24 "Proceso de Generación (generate.emic) Profundo" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Organización de módulos en categorías
-- Convenciones de nombres
-- Metadata de categorías
+- Dominio avanzado del script de generación
+- El corazón de EMIC Generate
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/06_Carpeta_Modules.md
-- @Seccion_4_Desarrollo/23_Desarrollo_Modulo.md (capítulo previo)
-
-REFERENCIAS DEL SDK REAL:
-- Listar categorías: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_modules\
+- @Seccion_4_Desarrollo/23_Desarrollo_Modulo_Completo.md (capítulo previo)
+- Referencia SDK: _modules/*/System/generate.emic
 
 CONTENIDO REQUERIDO:
-1. ¿Qué son las categorías?
-2. Categorías existentes (listar todas)
-3. Convenciones de nombres
-4. Cuándo crear nueva categoría
-5. Estructura de categoría
-6. Metadata de categoría
-7. Ejemplo de creación
+1. Propósito y anatomía detallada de generate.emic
+2. Secciones clave: Config salida, Hardware, Eventos, APIs, Main
+3. Paso de parámetros a APIs (Macros dinámicas)
+4. Gestión de stack de salidas (setOutput/restoreOutput)
+5. Ejemplo completo comentado línea por línea
+6. Debugging de generate.emic (errores comunes)
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\24_Creacion_Categorias.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\24_Proceso_Generacion_Generate.md
 ```
 
-**Dependencias:** Cap 06, 23
+**Dependencias:** Cap 23
 
 ---
 
-#### **CAPÍTULO 25: El Proceso de Generación (generate.emic)**
+#### **CAPÍTULO 25: Configuración Dinámica y Parametrización**
 
-**Archivo de Salida:** `Seccion_4_Desarrollo/25_Proceso_Generacion.md`
+**Archivo de Salida:** `Seccion_4_Desarrollo/25_Configuracion_Dinamica_Modulos.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 25 "El Proceso de Generación (generate.emic)" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 25 "Configuración Dinámica y Parametrización" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Análisis profundo de generate.emic
-- Secuencia de ejecución
-- Ejemplos del SDK
+- Hacer módulos y APIs configurables por el usuario
+- Uso de JSON Configurators
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/06_Carpeta_Modules.md
-- @Seccion_3_EMIC_Codify/ (todos los capítulos de Codify)
-- @Seccion_4_Desarrollo/23_Desarrollo_Modulo.md
-- @Seccion_4_Desarrollo/24_Creacion_Categorias.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md (ejemplo de generate.emic)
-
-REFERENCIAS DEL SDK REAL:
-- Analizar generate.emic de módulos reales
+- @Seccion_4_Desarrollo/24_Proceso_Generacion_Generate.md (capítulo previo)
+- Referencia SDK: module.json, config.json
 
 CONTENIDO REQUERIDO:
-1. Propósito de generate.emic
-2. Anatomía de un generate.emic típico
-3. Secuencia de ejecución:
-   - Configuración de salida
-   - Config de hardware
-   - Procesamiento de funciones/eventos
-   - Carga de APIs
-   - Carga de main
-   - Copia de archivos usuario
-   - Definición de módulos compilación
-   - Templates
-4. Paso de parámetros a APIs
-5. Gestión de salidas y stack
-6. Ejemplo completo comentado línea por línea
+1. Sistema de Configurator en EMIC
+2. config.json en módulos: Estructura y tipos
+3. Configurators en APIs: Menús interactivos JSON
+4. Uso de parámetros en generate.emic (lectura y aplicación)
+5. Ejemplo: API de comunicación con Baudrate configurable
+6. Validación de múltiples configuraciones
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\25_Proceso_Generacion.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\25_Configuracion_Dinamica_Modulos.md
 ```
 
-**Dependencias:** Cap 06, Cap 16-20 (Codify), Cap 23, 24
+**Dependencias:** Cap 24
 
 ---
 
-#### **CAPÍTULO 26: Configuración Dinámica de Módulos**
+#### **CAPÍTULO 26: Creación de Categorías y Organización del SDK**
 
-**Archivo de Salida:** `Seccion_4_Desarrollo/26_Configuracion_Dinamica.md`
+**Archivo de Salida:** `Seccion_4_Desarrollo/26_Categorias_Organizacion_SDK.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 26 "Configuración Dinámica de Módulos" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 26 "Creación de Categorías y Organización del SDK" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Sistema de Configurator
-- Menús interactivos
-- config.json y module.json
+- Estructura y organización limpia del SDK
+- Best practices de categorización
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_2_Estructura_SDK/06_Carpeta_Modules.md
-- @Seccion_3_EMIC_Codify/20_Etiquetado_Recursos.md (JSON Configurator)
-- @Seccion_4_Desarrollo/25_Proceso_Generacion.md (capítulo previo)
-- @INFO/EMIC-USER/EMIC-Manual-V4.1.1.md
-
-REFERENCIAS DEL SDK REAL:
-- Buscar ejemplos de Configurator en APIs/Drivers
+- @Seccion_4_Desarrollo/25_Configuracion_Dinamica_Modulos.md (capítulo previo)
+- Referencia SDK: Estructura de directorios
 
 CONTENIDO REQUERIDO:
-1. Sistema de Configurator
-2. config.json
-3. module.json
-4. Menús interactivos para integradores
-5. Configuración iterativa
-6. Validación de configuraciones
-7. Ejemplo: Configuración de protocolo RS232
+1. Importancia de la categorización
+2. Categorías existentes para APIs y Módulos
+3. Criterios para crear nuevas categorías
+4. Convenciones de nombres y estructura de carpetas
+5. Metadata de categorías
+6. Validación de la organización (Discovery)
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\26_Configuracion_Dinamica.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_4_Desarrollo\26_Categorias_Organizacion_SDK.md
 ```
 
-**Dependencias:** Cap 06, Cap 20, Cap 25
+**Dependencias:** Cap 25
 
 ---
 
-### SECCIÓN 5: CASOS PRÁCTICOS
+### SECCIÓN 5: CASOS PRÁCTICOS DE DESARROLLO-INTEGRACIÓN
 
 ---
 
-#### **CAPÍTULO 27: Caso Práctico - API de LEDs**
+#### **CAPÍTULO 27: Caso Práctico - API de LEDs Desde Cero**
 
-**Archivo de Salida:** `Seccion_5_Casos_Practicos/27_Practica_API_LED.md`
+**Archivo de Salida:** `Seccion_5_Casos_Practicos/27_Caso_API_LEDs_Completo.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 27 "Caso Práctico: API de LEDs" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 27 "Caso Práctico: API de LEDs Desde Cero" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Desarrollo completo desde cero
-- Código completo comentado
-- Uso del API real del SDK como base
+- Tutorial completo paso a paso
+- Ciclo: Desarrollo -> Integración -> Validación
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_4_Desarrollo/21_Desarrollo_API.md
-- @Seccion_4_Desarrollo/26_Configuracion_Dinamica.md (capítulo previo)
-
-REFERENCIAS DEL SDK REAL:
-- Analizar en detalle: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_api\Indicators\LEDs\
-- Código completo: led.emic, inc/led.h, src/led.c
+- @Seccion_4_Desarrollo/21_Desarrollo_API_Paso_a_Paso.md
+- Referencia SDK: _api/Indicators/LEDs/
 
 CONTENIDO REQUERIDO:
-1. Planificación del API de LEDs
-2. Funcionalidades:
-   - state (on/off/toggle)
-   - blink (parpadeo con parámetros)
-3. Código completo comentado
-4. Etiquetado de recursos
-5. Archivo .emic completo
-6. Testing en módulo
+1. Planificación: API de LEDs (state, blink, toggle)
+2. Desarrollo: Código C, led.h, led.c
+3. Etiquetas: Tags DOXYGEN completos
+4. Definición: Archivo led.emic
+5. Integración: Módulo de prueba "Test_LED" con hardware virtual/real
+6. Validación: Generar, compilar y probar funcionamiento
+7. Resultado final: API lista para el SDK
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_5_Casos_Practicos\27_Practica_API_LED.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_5_Casos_Practicos\27_Caso_API_LEDs_Completo.md
 ```
 
 **Dependencias:** Cap 21, 26
 
 ---
 
-#### **CAPÍTULO 28: Caso Práctico - Driver de Sensor I2C**
+#### **CAPÍTULO 28: Caso Práctico - Driver I2C + Sensor**
 
-**Archivo de Salida:** `Seccion_5_Casos_Practicos/28_Practica_Driver_I2C.md`
+**Archivo de Salida:** `Seccion_5_Casos_Practicos/28_Caso_Driver_I2C_Sensor.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 28 "Caso Práctico: Driver de Sensor I2C" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 28 "Caso Práctico: Driver I2C + Sensor" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Desarrollo de driver complejo
-- Comunicación I2C
-- Integración con HAL
+- Desarrollo de Driver de hardware
+- Uso de HAL I2C real
 
 REFERENCIAS DE ARCHIVOS:
 - @Seccion_4_Desarrollo/22_Desarrollo_Driver.md
-- @Seccion_5_Casos_Practicos/27_Practica_API_LED.md (capítulo previo)
-
-REFERENCIAS DEL SDK REAL:
-- Analizar: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_drivers\I2C\
-- Analizar: _hal/I2C/
+- Referencia SDK: _drivers/I2C/, _hal/I2C/
 
 CONTENIDO REQUERIDO:
-1. Planificación del driver
-2. Protocolo I2C (breve)
-3. Uso del HAL I2C
-4. Código completo comentado
-5. Gestión de errores
-6. Testing
+1. Planificación: Driver para sensor BME280 (I2C)
+2. Integración HAL: Usar funciones I2C del sistema
+3. Desarrollo: Código C del driver, manejo de registros del sensor
+4. Integración: Módulo "Monitor_Ambiental" con display
+5. Configuración: I2C en generate.emic
+6. Validación: Lectura de datos reales del sensor
+7. Debugging y ajustes
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_5_Casos_Practicos\28_Practica_Driver_I2C.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_5_Casos_Practicos\28_Caso_Driver_I2C_Sensor.md
 ```
 
 **Dependencias:** Cap 22, 27
@@ -1826,7 +902,7 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 
 #### **CAPÍTULO 29: Caso Práctico - Módulo de Control con USB**
 
-**Archivo de Salida:** `Seccion_5_Casos_Practicos/29_Practica_Modulo_USB.md`
+**Archivo de Salida:** `Seccion_5_Casos_Practicos/29_Caso_Modulo_Control_USB.md`
 
 **Prompt para Claude Code:**
 
@@ -1834,405 +910,296 @@ Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustria
 Crea el Capítulo 29 "Caso Práctico: Módulo de Control con USB" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Módulo completo con múltiples APIs
-- Control de actuadores + comunicación USB
-- Ejemplo real del SDK
+- Desarrollo de Módulo complejo multirecurso
+- Comunicación USB CDC
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_4_Desarrollo/23_Desarrollo_Modulo.md
-- @Seccion_5_Casos_Practicos/27_Practica_API_LED.md
-- @Seccion_5_Casos_Practicos/28_Practica_Driver_I2C.md (capítulo previo)
-
-REFERENCIAS DEL SDK REAL:
-- Analizar módulo con USB: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_modules\Wired_Control\
+- @Seccion_4_Desarrollo/23_Desarrollo_Modulo_Completo.md
+- Referencia SDK: _modules/Wired_Control/
 
 CONTENIDO REQUERIDO:
-1. Planificación del módulo
-2. Hardware: Relés + USB
-3. APIs necesarias:
-   - Relay API
-   - USB API
-   - LED API
-   - Timer API
-4. generate.emic completo
-5. PCB configuration
-6. Testing completo
+1. Planificación: Módulo USB_Relay_Controller
+2. Recursos: USB CDC API, Relay API, LED API
+3. Estructura y generate.emic: Configuración de USB y periféricos
+4. Metadata: Configuración de número de relés
+5. Integración: Proyecto de prueba con comandos seriales
+6. Validación: Controlar relés desde PC vía terminal
+7. Resultado final: Módulo listo para producción
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_5_Casos_Practicos\29_Practica_Modulo_USB.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_5_Casos_Practicos\29_Caso_Modulo_Control_USB.md
 ```
 
-**Dependencias:** Cap 23, 27, 28
+**Dependencias:** Cap 23, 28
 
 ---
 
-#### **CAPÍTULO 30: Caso Práctico - Módulo Multi-API Complejo**
+#### **CAPÍTULO 30: Caso Práctico - Sistema Multi-Módulo (Gateway Industrial)**
 
-**Archivo de Salida:** `Seccion_5_Casos_Practicos/30_Practica_Modulo_Complejo.md`
+**Archivo de Salida:** `Seccion_5_Casos_Practicos/30_Caso_Gateway_Industrial_Multimodulo.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 30 "Caso Práctico: Módulo Multi-API Complejo" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 30 "Caso Práctico: Sistema Multi-Módulo (Gateway Industrial)" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Módulo avanzado con múltiples APIs
-- Comunicación, sensores, actuadores
-- Caso real del SDK
+- Desarrollo avanzado de múltiples componentes interconectados
+- Modbus, RS485, Display
 
 REFERENCIAS DE ARCHIVOS:
-- @Seccion_4_Desarrollo/23_Desarrollo_Modulo.md
-- @Seccion_5_Casos_Practicos/29_Practica_Modulo_USB.md (capítulo previo)
-
-REFERENCIAS DEL SDK REAL:
-- Analizar módulo complejo: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\_modules\
+- @Seccion_5_Casos_Practicos/29_Caso_Modulo_Control_USB.md
+- Referencia SDK: APIs de Protocolos
 
 CONTENIDO REQUERIDO:
-1. Planificación de módulo complejo
-2. Integración de múltiples APIs
-3. Gestión de dependencias
-4. generate.emic avanzado
-5. Configuración dinámica
-6. Testing exhaustivo
+1. Reto: Crear componentes para Gateway Modbus
+2. Componente 1: API Modbus RTU
+3. Componente 2: Driver RS485 Transceiver
+4. Componente 3: Módulo Gateway completo
+5. Integración: Proyecto en EMIC-Editor uniendo todo
+6. Validación compleja de comunicaciones
+7. Conclusión de los casos prácticos
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_5_Casos_Practicos\30_Practica_Modulo_Complejo.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_5_Casos_Practicos\30_Caso_Gateway_Industrial_Multimodulo.md
 ```
 
-**Dependencias:** Cap 23, 29
+**Dependencias:** Cap 29
 
 ---
 
-### SECCIÓN 6: AVANZADO
+### SECCIÓN 6: TESTING, VALIDACIÓN Y TROUBLESHOOTING
 
 ---
 
-#### **CAPÍTULO 31: Buenas Prácticas y Convenciones**
+#### **CAPÍTULO 31: Buenas Prácticas de Desarrollo de Componentes SDK**
 
-**Archivo de Salida:** `Seccion_6_Avanzado/31_Buenas_Practicas.md`
+**Archivo de Salida:** `Seccion_6_Avanzado/31_Buenas_Practicas_Desarrollo.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 31 "Buenas Prácticas y Convenciones" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 31 "Buenas Prácticas de Desarrollo de Componentes SDK" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Convenciones de código
-- Estándares EMIC
-- Mejores prácticas
-
-REFERENCIAS DE ARCHIVOS:
-- Todos los capítulos de desarrollo (21-30)
-- @EMIC_Developer_Manual_V2.1.md
+- Estándares de calidad y estilo
+- Mantenibilidad del código
 
 CONTENIDO REQUERIDO:
-1. Convenciones de nombres:
-   - APIs
-   - Drivers
-   - Módulos
-   - Funciones
-   - Variables
-2. Documentación obligatoria
-3. Gestión de dependencias
-4. Optimización de código
-5. Reutilización vs duplicación
-6. Manejo de errores
-7. Versionado
-8. Comentarios y legibilidad
-9. Testing
+1. Convenciones de nombres (APIs, Drivers, Funciones)
+2. Estructura de código recomendada
+3. Documentación obligatoria (Readme, Tags)
+4. Gestión de dependencias eficiente
+5. Manejo de errores estandarizado
+6. Optimización de recursos
+7. Versionado semántico de componentes
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_6_Avanzado\31_Buenas_Practicas.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_6_Avanzado\31_Buenas_Practicas_Desarrollo.md
 ```
 
-**Dependencias:** Cap 21-30
+**Dependencias:** Cap 30
 
 ---
 
-#### **CAPÍTULO 32: Testing y Validación**
+#### **CAPÍTULO 32: Testing y Validación de Componentes**
 
-**Archivo de Salida:** `Seccion_6_Avanzado/32_Testing.md`
+**Archivo de Salida:** `Seccion_6_Avanzado/32_Testing_Validacion_Componentes.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 32 "Testing y Validación" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 32 "Testing y Validación de Componentes" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Metodología de testing para EMIC
-- Validación de recursos
-- Testing de módulos
-
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_6_Avanzado/31_Buenas_Practicas.md (capítulo previo)
-- @EMIC_Module_Debugging_Guide_for_AI.md
+- Metodologías de prueba para asegurar calidad
+- Validación antes de publicar
 
 CONTENIDO REQUERIDO:
-1. Testing de APIs
-2. Testing de Drivers
-3. Testing de Módulos
-4. Validación de Discovery
-5. Testing de generate.emic
-6. Simulación vs hardware real
-7. Herramientas de testing
+1. Filosofía de testing en EMIC
+2. Niveles: Unitario, Integración, Sistema, Hardware
+3. Testing de APIs: Casos de prueba
+4. Testing de Drivers: Timing y hardware real
+5. Testing de Módulos: Configuración e interacción
+6. Validación con EMIC Discovery (previo a release)
+7. Documentación de pruebas
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_6_Avanzado\32_Testing.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_6_Avanzado\32_Testing_Validacion_Componentes.md
 ```
 
 **Dependencias:** Cap 31
 
 ---
 
-#### **CAPÍTULO 33: Troubleshooting y Debugging**
+#### **CAPÍTULO 33: Troubleshooting y Debugging de Desarrollos**
 
-**Archivo de Salida:** `Seccion_6_Avanzado/33_Troubleshooting.md`
+**Archivo de Salida:** `Seccion_6_Avanzado/33_Troubleshooting_Debugging.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 33 "Troubleshooting y Debugging" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 33 "Troubleshooting y Debugging de Desarrollos" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Problemas comunes
-- Soluciones
-- Herramientas de debug
-
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_6_Avanzado/32_Testing.md (capítulo previo)
-- @EMIC_Module_Debugging_Guide_for_AI.md
+- Solución de problemas comunes durante el desarrollo
 
 CONTENIDO REQUERIDO:
-1. Errores comunes de Discovery
-2. Errores de Generate
-3. Errores de compilación
-4. Debugging de macros
-5. Validación de Tags
-6. Herramientas de diagnóstico
-7. FAQ de problemas
+1. Metodología de debugging
+2. Errores comunes en APIs (Tags, dependencias)
+3. Errores en Drivers (HAL, registros)
+4. Errores en generate.emic (Rutas, macros)
+5. Errores de EMIC Discovery
+6. Debugging en hardware (Herramientas, UART)
+7. FAQ técnico
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_6_Avanzado\33_Troubleshooting.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_6_Avanzado\33_Troubleshooting_Debugging.md
 ```
 
 **Dependencias:** Cap 32
 
 ---
 
-#### **CAPÍTULO 34: Optimización y Performance**
+#### **CAPÍTULO 34: Optimización y Performance de Componentes**
 
-**Archivo de Salida:** `Seccion_6_Avanzado/34_Optimizacion.md`
-
-**Prompt para Claude Code:**
-
-```
-Crea el Capítulo 34 "Optimización y Performance" del Manual de Desarrollo EMIC SDK.
-
-CONTEXTO:
-- Optimización de código generado
-- Performance en sistemas embebidos
-- Memory management
-
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_6_Avanzado/31_Buenas_Practicas.md
-- @Seccion_6_Avanzado/33_Troubleshooting.md (capítulo previo)
-
-CONTENIDO REQUERIDO:
-1. Optimización de APIs
-2. Optimización de memoria
-3. Optimización de velocidad
-4. Gestión de recursos limitados
-5. Profiling
-6. Trade-offs
-
-SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_6_Avanzado\34_Optimizacion.md
-```
-
-**Dependencias:** Cap 31, 33
-
----
-
-### SECCIÓN 7: REFERENCIAS
-
----
-
-#### **CAPÍTULO 35: Apéndice A - Referencia Rápida de Comandos**
-
-**Archivo de Salida:** `Seccion_7_Referencias/35_Referencia_Comandos.md`
+**Archivo de Salida:** `Seccion_6_Avanzado/34_Optimizacion_Performance.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 35 "Apéndice A: Referencia Rápida de Comandos" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 34 "Optimización y Performance de Componentes" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Referencia rápida de todos los comandos EMIC-Codify
-- Formato tipo cheatsheet
-
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_3_EMIC_Codify/ (todos los capítulos de Codify)
-- @Seccion_6_Avanzado/34_Optimizacion.md (capítulo previo)
+- Técnicas para código eficiente en sistemas embebidos
 
 CONTENIDO REQUERIDO:
-1. Tabla de todos los comandos
-2. Sintaxis resumida
-3. Parámetros
-4. Ejemplos breves
-5. Referencias cruzadas a capítulos detallados
-
-FORMATO:
-- Tablas concisas
-- Quick reference
-- Índice alfabético
+1. Principios de optimización (Memoria, CPU, Energía)
+2. Optimización de Memoria (Stack, Flash, Variables)
+3. Optimización de CPU (Interrupciones, Algoritmos)
+4. Optimización de Energía (Sleep modes)
+5. Profiling y medición
+6. Trade-offs: Velocidad vs Tamaño
+7. Optimización específica en APIs y Drivers
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_7_Referencias\35_Referencia_Comandos.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_6_Avanzado\34_Optimizacion_Performance.md
 ```
 
-**Dependencias:** Cap 16-20, Cap 34
+**Dependencias:** Cap 33
 
 ---
 
-#### **CAPÍTULO 36: Apéndice B - Referencia Rápida de Tags**
+### SECCIÓN 7: REFERENCIAS PARA DESARROLLADORES
+
+---
+
+#### **CAPÍTULO 35: Referencia Rápida de Comandos EMIC-Codify**
+
+**Archivo de Salida:** `Seccion_7_Referencias/35_Referencia_Comandos_Codify.md`
+
+**Prompt para Claude Code:**
+
+```
+Crea el Capítulo 35 "Referencia Rápida de Comandos EMIC-Codify" del Manual de Desarrollo EMIC SDK.
+
+CONTEXTO:
+- Cheatsheet de comandos para uso diario
+
+CONTENIDO REQUERIDO:
+1. Tabla resumen: Gestión de archivos (copy, setInput...)
+2. Tabla resumen: Macros (define, substitute...)
+3. Tabla resumen: Control de Flujo (if, foreach...)
+4. Sintaxis de volúmenes lógicos
+5. Parámetros comunes
+6. Ejemplos mínimos copy-paste
+
+SALIDA:
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_7_Referencias\35_Referencia_Comandos_Codify.md
+```
+
+**Dependencias:** Cap 16-19
+
+---
+
+#### **CAPÍTULO 36: Referencia Rápida de Tags (DOXYGEN y JSON)**
 
 **Archivo de Salida:** `Seccion_7_Referencias/36_Referencia_Tags.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 36 "Apéndice B: Referencia Rápida de Tags" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 36 "Referencia Rápida de Tags (DOXYGEN y JSON)" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Referencia rápida de Tags
-- Formato tipo cheatsheet
-
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_3_EMIC_Codify/20_Etiquetado_Recursos.md
-- @Seccion_7_Referencias/35_Referencia_Comandos.md (capítulo previo)
+- Cheatsheet de etiquetas de publicación
 
 CONTENIDO REQUERIDO:
-1. Todos los tipos de Tags
-2. Sintaxis DOXYGEN
-3. Sintaxis JSON
-4. Ejemplos breves
-5. Referencias a capítulos
+1. Tags DOXYGEN funciones (@fn, @param...)
+2. Tags Eventos y Variables
+3. Tag driverName
+4. Formato JSON Configurator
+5. Ejemplos completos de bloques comentados
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_7_Referencias\36_Referencia_Tags.md
 ```
 
-**Dependencias:** Cap 20, Cap 35
+**Dependencias:** Cap 20
 
 ---
 
-#### **CAPÍTULO 37: Apéndice C - Plantillas de Código**
+#### **CAPÍTULO 37: Plantillas de Código para Desarrolladores**
 
 **Archivo de Salida:** `Seccion_7_Referencias/37_Plantillas_Codigo.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 37 "Apéndice C: Plantillas de Código" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 37 "Plantillas de Código para Desarrolladores" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Plantillas listas para usar
-- Copy-paste templates
-
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_4_Desarrollo/ (todos)
-- @Seccion_7_Referencias/36_Referencia_Tags.md (capítulo previo)
+- Boilerplate code para acelerar el desarrollo
 
 CONTENIDO REQUERIDO:
-1. Template de API completa
+1. Template de API (.h, .c, .emic)
 2. Template de Driver
-3. Template de generate.emic
-4. Template de module.json
-5. Template de config.json
-6. Template de funciones etiquetadas
+3. Template de generate.emic completo
+4. Template de module.json y config.json
+5. Template de JSON Configurator
+6. Instrucciones de uso
 
 SALIDA:
 Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_7_Referencias\37_Plantillas_Codigo.md
 ```
 
-**Dependencias:** Cap 21-26, Cap 36
+**Dependencias:** General
 
 ---
 
-#### **CAPÍTULO 38: Apéndice D - Recursos Adicionales**
+#### **CAPÍTULO 38: Recursos y Comunidad de Desarrolladores**
 
-**Archivo de Salida:** `Seccion_7_Referencias/38_Recursos_Adicionales.md`
+**Archivo de Salida:** `Seccion_7_Referencias/38_Recursos_Comunidad.md`
 
 **Prompt para Claude Code:**
 
 ```
-Crea el Capítulo 38 "Apéndice D: Recursos Adicionales" del Manual de Desarrollo EMIC SDK.
+Crea el Capítulo 38 "Recursos y Comunidad de Desarrolladores" del Manual de Desarrollo EMIC SDK.
 
 CONTEXTO:
-- Recursos externos
-- Comunidad EMIC
-- Documentación adicional
-
-REFERENCIAS DE ARCHIVOS:
-- @Seccion_7_Referencias/37_Plantillas_Codigo.md (capítulo previo)
-- @README.md
-- @EMIC.md
+- Dónde encontrar más ayuda y recursos
 
 CONTENIDO REQUERIDO:
-1. Links a documentación oficial
-2. Comunidad EMIC
-3. GitHub
-4. Foros y soporte
-5. Tutoriales externos
-6. Videos (si existen)
-7. Otros manuales relacionados
+1. Documentación Oficial y API References
+2. Repositorios de ejemplos
+3. Canales de Comunidad (Foros, Discord)
+4. Soporte Técnico y reporte de bugs
+5. Cómo contribuir al SDK
+6. Herramientas útiles (MPLAB, CLI)
 
 SALIDA:
-Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_7_Referencias\38_Recursos_Adicionales.md
+Guarda en: C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M\Manual_Desarrollo_EMIC\Seccion_7_Referencias\38_Recursos_Comunidad.md
 ```
 
-**Dependencias:** Cap 37 (último capítulo)
+**Dependencias:** Final
 
----
-
-## 📊 ESTADÍSTICAS DEL MANUAL
-
-- **Total de capítulos:** 38
-- **Total de secciones:** 7
-- **Páginas estimadas:** 300-400 páginas
-- **Nivel:** Desarrolladores de recursos EMIC
-- **Audiencia:** Desarrolladores con conocimientos de C y sistemas embebidos
-
----
-
-## 🚀 CÓMO USAR ESTE PLAN
-
-### Para ejecutar cada capítulo:
-
-1. **Abrir nueva sesión de Claude Code**
-2. **Copiar el prompt del capítulo deseado**
-3. **Ejecutar en Claude Code**
-4. **Verificar que el archivo se guardó correctamente**
-5. **Marcar en el checklist** ✅
-
-### Orden recomendado:
-
-- **Secuencial:** Capítulos 00 → 38 (ideal para manual completo)
-- **Por secciones:** Completar una sección antes de pasar a la siguiente
-- **Prioritario:** Cap 00, 01, 02, 05, 16, 21, 23 (core concepts)
-
----
-
-## 📝 NOTAS FINALES
-
-- Cada prompt es **independiente** y puede ejecutarse en sesiones separadas
-- Los prompts incluyen todas las **referencias necesarias** a archivos y capítulos previos
-- Se usan **ejemplos reales del SDK** en `C:\Users\franc\Dropbox\EMIC\DevCommunity\mariano.hunkeler@rfindustrial.com\DEV\EMIC_IA_M`
-- El manual será **exhaustivo y práctico**
-- Cada capítulo es un **documento standalone** pero referencia otros cuando es necesario
-
----
-
-**Última actualización:** 2025-11-04
-**Versión del Plan:** 1.0
-**Status:** ✅ Listo para ejecución

@@ -84,38 +84,38 @@ Este manual está organizado en **7 secciones** con **38 capítulos**:
 - [Cap 14 - Carpeta `_system/` - Sistema Core EMIC](../Seccion_2_Estructura_SDK/14_Carpeta_System.md)
 - [Cap 15 - Carpeta `_util/` - Utilidades Generales](../Seccion_2_Estructura_SDK/15_Carpeta_Util.md)
 
-### **Sección 3: EMIC-Codify** 💻
-- [Cap 16 - Fundamentos de EMIC-Codify](../Seccion_3_EMIC_Codify/16_Fundamentos_Codify.md)
-- [Cap 17 - Comandos EMIC-Codify (Parte 1: Gestión de Archivos)](../Seccion_3_EMIC_Codify/17_Comandos_Archivos.md)
-- [Cap 18 - Comandos EMIC-Codify (Parte 2: Macros y Sustitución)](../Seccion_3_EMIC_Codify/18_Comandos_Macros.md)
-- [Cap 19 - Comandos EMIC-Codify (Parte 3: Control de Flujo)](../Seccion_3_EMIC_Codify/19_Comandos_Control.md)
-- [Cap 20 - Etiquetado de Recursos (Tags)](../Seccion_3_EMIC_Codify/20_Etiquetado_Recursos.md)
+### **Sección 3: EMIC-Codify para Desarrolladores** 💻
+- [Cap 16 - Fundamentos de EMIC-Codify para Desarrollo](../Seccion_3_EMIC_Codify/16_Fundamentos_Codify_Desarrollo.md)
+- [Cap 17 - Comandos de Gestión de Archivos y Recursos](../Seccion_3_EMIC_Codify/17_Comandos_Gestion_Archivos.md)
+- [Cap 18 - Sistema de Macros y Sustitución](../Seccion_3_EMIC_Codify/18_Sistema_Macros_Sustitucion.md)
+- [Cap 19 - Control de Flujo y Condicionales](../Seccion_3_EMIC_Codify/19_Control_Flujo_Condicionales.md)
+- [Cap 20 - Etiquetado de Recursos (Tags DOXYGEN y JSON)](../Seccion_3_EMIC_Codify/20_Etiquetado_Recursos_Tags.md)
 
-### **Sección 4: Desarrollo Práctico** 🛠️
-- [Cap 21 - Desarrollo de una API EMIC - Paso a Paso](../Seccion_4_Desarrollo/21_Desarrollo_API.md)
+### **Sección 4: Desarrollo de Componentes SDK** 🛠️
+- [Cap 21 - Desarrollo de una API EMIC - Paso a Paso](../Seccion_4_Desarrollo/21_Desarrollo_API_Paso_a_Paso.md)
 - [Cap 22 - Desarrollo de un Driver EMIC](../Seccion_4_Desarrollo/22_Desarrollo_Driver.md)
-- [Cap 23 - Desarrollo de un Módulo EMIC Completo](../Seccion_4_Desarrollo/23_Desarrollo_Modulo.md)
-- [Cap 24 - Creación de Categorías de Módulos](../Seccion_4_Desarrollo/24_Creacion_Categorias.md)
-- [Cap 25 - El Proceso de Generación (generate.emic)](../Seccion_4_Desarrollo/25_Proceso_Generacion.md)
-- [Cap 26 - Configuración Dinámica de Módulos](../Seccion_4_Desarrollo/26_Configuracion_Dinamica.md)
+- [Cap 23 - Desarrollo de un Módulo EMIC Completo](../Seccion_4_Desarrollo/23_Desarrollo_Modulo_Completo.md)
+- [Cap 24 - Proceso de Generación (generate.emic) Profundo](../Seccion_4_Desarrollo/24_Proceso_Generacion_Generate.md)
+- [Cap 25 - Configuración Dinámica y Parametrización](../Seccion_4_Desarrollo/25_Configuracion_Dinamica_Modulos.md)
+- [Cap 26 - Creación de Categorías y Organización del SDK](../Seccion_4_Desarrollo/26_Categorias_Organizacion_SDK.md)
 
-### **Sección 5: Casos Prácticos** 🎓
-- [Cap 27 - Caso Práctico: API de LEDs](../Seccion_5_Casos_Practicos/27_Practica_API_LED.md)
-- [Cap 28 - Caso Práctico: Driver de Sensor I2C](../Seccion_5_Casos_Practicos/28_Practica_Driver_I2C.md)
-- [Cap 29 - Caso Práctico: Módulo de Control con USB](../Seccion_5_Casos_Practicos/29_Practica_Modulo_USB.md)
-- [Cap 30 - Caso Práctico: Módulo Multi-API Complejo](../Seccion_5_Casos_Practicos/30_Practica_Modulo_Complejo.md)
+### **Sección 5: Casos Prácticos de Desarrollo-Integración** 🎓
+- [Cap 27 - Caso Práctico - API de LEDs Desde Cero](../Seccion_5_Casos_Practicos/27_Caso_API_LEDs_Completo.md)
+- [Cap 28 - Caso Práctico - Driver I2C + Sensor](../Seccion_5_Casos_Practicos/28_Caso_Driver_I2C_Sensor.md)
+- [Cap 29 - Caso Práctico - Módulo de Control con USB](../Seccion_5_Casos_Practicos/29_Caso_Modulo_Control_USB.md)
+- [Cap 30 - Caso Práctico - Sistema Multi-Módulo (Gateway Industrial)](../Seccion_5_Casos_Practicos/30_Caso_Gateway_Industrial_Multimodulo.md)
 
-### **Sección 6: Avanzado** 🚀
-- [Cap 31 - Buenas Prácticas y Convenciones](../Seccion_6_Avanzado/31_Buenas_Practicas.md)
-- [Cap 32 - Testing y Validación](../Seccion_6_Avanzado/32_Testing.md)
-- [Cap 33 - Troubleshooting y Debugging](../Seccion_6_Avanzado/33_Troubleshooting.md)
-- [Cap 34 - Optimización y Performance](../Seccion_6_Avanzado/34_Optimizacion.md)
+### **Sección 6: Testing, Validación y Troubleshooting** 🚀
+- [Cap 31 - Buenas Prácticas de Desarrollo de Componentes SDK](../Seccion_6_Avanzado/31_Buenas_Practicas_Desarrollo.md)
+- [Cap 32 - Testing y Validación de Componentes](../Seccion_6_Avanzado/32_Testing_Validacion_Componentes.md)
+- [Cap 33 - Troubleshooting y Debugging de Desarrollos](../Seccion_6_Avanzado/33_Troubleshooting_Debugging.md)
+- [Cap 34 - Optimización y Performance de Componentes](../Seccion_6_Avanzado/34_Optimizacion_Performance.md)
 
-### **Sección 7: Referencias** 📚
-- [Cap 35 - Apéndice A: Referencia Rápida de Comandos](../Seccion_7_Referencias/35_Referencia_Comandos.md)
-- [Cap 36 - Apéndice B: Referencia Rápida de Tags](../Seccion_7_Referencias/36_Referencia_Tags.md)
-- [Cap 37 - Apéndice C: Plantillas de Código](../Seccion_7_Referencias/37_Plantillas_Codigo.md)
-- [Cap 38 - Apéndice D: Recursos Adicionales](../Seccion_7_Referencias/38_Recursos_Adicionales.md)
+### **Sección 7: Referencias para Desarrolladores** 📚
+- [Cap 35 - Referencia Rápida de Comandos EMIC-Codify](../Seccion_7_Referencias/35_Referencia_Comandos_Codify.md)
+- [Cap 36 - Referencia Rápida de Tags (DOXYGEN y JSON)](../Seccion_7_Referencias/36_Referencia_Tags.md)
+- [Cap 37 - Plantillas de Código para Desarrolladores](../Seccion_7_Referencias/37_Plantillas_Codigo.md)
+- [Cap 38 - Recursos y Comunidad de Desarrolladores](../Seccion_7_Referencias/38_Recursos_Comunidad.md)
 
 ---
 
