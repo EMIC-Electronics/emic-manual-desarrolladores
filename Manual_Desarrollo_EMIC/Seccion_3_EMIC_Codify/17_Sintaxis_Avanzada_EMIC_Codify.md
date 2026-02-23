@@ -6,14 +6,15 @@
 3. [Ámbito de Variables (Scope)](#ámbito-de-variables-scope)
 4. [Sustituciones Complejas](#sustituciones-complejas)
 5. [Directivas Avanzadas](#directivas-avanzadas)
-6. [Patrones de Multi-Instanciación](#patrones-de-multi-instanciación)
-7. [Include Guards y Prevención de Duplicados](#include-guards-y-prevención-de-duplicados)
-8. [Composición de Componentes](#composición-de-componentes)
-9. [Herencia de Variables](#herencia-de-variables)
-10. [Debugging y Troubleshooting](#debugging-y-troubleshooting)
-11. [Casos Prácticos Avanzados](#casos-prácticos-avanzados)
-12. [Buenas Prácticas Avanzadas](#buenas-prácticas-avanzadas)
-13. [Resumen del Capítulo](#resumen-del-capítulo)
+6. [Iteración y Expansión de Colecciones](#iteración-y-expansión-de-colecciones)
+7. [Patrones de Multi-Instanciación](#patrones-de-multi-instanciación)
+8. [Include Guards y Prevención de Duplicados](#include-guards-y-prevención-de-duplicados)
+9. [Composición de Componentes](#composición-de-componentes)
+10. [Herencia de Variables](#herencia-de-variables)
+11. [Debugging y Troubleshooting](#debugging-y-troubleshooting)
+12. [Casos Prácticos Avanzados](#casos-prácticos-avanzados)
+13. [Buenas Prácticas Avanzadas](#buenas-prácticas-avanzadas)
+14. [Resumen del Capítulo](#resumen-del-capítulo)
 
 ---
 
@@ -22,8 +23,9 @@
 Este capítulo profundiza en las características avanzadas de **EMIC-Codify**, incluyendo patrones complejos de uso, técnicas de optimización, y casos prácticos que demuestran el poder del lenguaje para crear componentes altamente reutilizables y configurables.
 
 Asumimos que ya tienes conocimientos básicos de EMIC-Codify del Capítulo 16. Aquí exploraremos:
-- Variables anidadas y de sistema
+- Variables anidadas, de sistema y colecciones de 3 niveles
 - Ámbito (scope) y propagación de variables
+- Iteración y expansión de colecciones (wildcards, foreach, join)
 - Patrones avanzados de multi-instanciación
 - Técnicas de debugging
 - Casos de uso del mundo real
@@ -112,18 +114,14 @@ EMIC:endif
 
 ### Variables con Puntos (Namespacing)
 
-Las variables pueden contener puntos para crear **namespaces lógicos**:
+Las variables pueden contener puntos para crear **namespaces lógicos**. EMIC-Codify soporta dos niveles de organización:
+
+#### Colecciones de 2 niveles (`colección.clave`)
 
 ```emic
 // Namespace de sistema
 EMIC:define(system.ucName, pic24FJ64GA002)
 EMIC:define(system.clockFreq, 32000000)
-
-// Namespace de configuración
-EMIC:define(config.uart1.baud, 9600)
-EMIC:define(config.uart1.buffer, 512)
-EMIC:define(config.uart2.baud, 115200)
-EMIC:define(config.uart2.buffer, 256)
 
 // Namespace de módulos
 EMIC:define(c_modules.uart1, uart1)
@@ -131,7 +129,26 @@ EMIC:define(c_modules.timer1, timer1)
 EMIC:define(main_includes.uart1, uart1)
 ```
 
-**Ventaja:** Organización clara y prevención de colisiones de nombres.
+#### Colecciones de 3 niveles (`grupo.subgrupo.clave`)
+
+Para organización más compleja, se pueden usar **3 niveles de profundidad**:
+
+```emic
+// Hardware → periférico → propiedad
+EMIC:define(hw.uart.baud, 9600)
+EMIC:define(hw.uart.parity, none)
+EMIC:define(hw.spi.clock, 1000000)
+EMIC:define(hw.spi.mode, 0)
+
+// Uso: .{hw.uart.baud}. → 9600
+// Uso: .{hw.spi.clock}. → 1000000
+```
+
+La distinción entre 2 y 3 niveles se determina automáticamente por la **cantidad de puntos** en el nombre:
+- `col.key` (1 punto) → colección de 2 niveles
+- `col1.col2.key` (2 puntos) → colección de 3 niveles
+
+**Ventaja:** Organización jerárquica clara y prevención de colisiones de nombres.
 
 ---
 
@@ -482,6 +499,175 @@ EMIC:ifdef ENABLE_COMMUNICATION
 
 EMIC:endif
 ```
+
+---
+
+## Iteración y Expansión de Colecciones
+
+Cuando se trabaja con colecciones de variables (definidas con namespacing), EMIC-Codify ofrece mecanismos para iterar sobre ellas y generar código automáticamente.
+
+### Expansión Inline con Comodín
+
+La forma más simple de iterar es usando el **comodín `*`** directamente en una referencia a macro:
+
+```emic
+EMIC:define(canales.ch0, ADC_AN0)
+EMIC:define(canales.ch1, ADC_AN1)
+EMIC:define(canales.ch2, ADC_AN2)
+
+// Una línea con comodín genera N líneas (una por key)
+uint16_t val = .{canales.*}.;
+```
+
+Resultado:
+```c
+uint16_t val = ADC_AN0;
+uint16_t val = ADC_AN1;
+uint16_t val = ADC_AN2;
+```
+
+#### Patrones de comodín con 3 niveles
+
+```emic
+EMIC:define(hw.uart.baud, 9600)
+EMIC:define(hw.uart.parity, none)
+EMIC:define(hw.spi.clock, 1000000)
+EMIC:define(hw.spi.mode, 0)
+
+// Comodín en el 3er nivel: expande propiedades de un periférico
+cfg = .{hw.uart.*}.;
+// → cfg = 9600; y cfg = none;
+
+// Comodín en el 2do nivel: expande periféricos con una propiedad
+init(.{hw.*.mode}.);
+// → init(0); (solo spi tiene "mode")
+
+// Doble comodín: expande todo (2 pasadas)
+val = .{hw.*.*}.;
+// 1ra pasada: val = .{hw.uart.*}.; y val = .{hw.spi.*}.;
+// 2da pasada: val = 9600; val = none; val = 1000000; val = 0;
+```
+
+---
+
+### Expansión con Separador (Join)
+
+Para generar **una sola línea** con todos los valores separados, se agrega `.[separador].` después del comodín:
+
+```emic
+EMIC:define(canales.ch0, ADC_AN0)
+EMIC:define(canales.ch1, ADC_AN1)
+EMIC:define(canales.ch2, ADC_AN2)
+
+// Join con coma
+enum { .{canales.*}. .[, ]. };
+// → enum { ADC_AN0, ADC_AN1, ADC_AN2 };
+
+// Join con pipe
+int flags = .{opciones.*}. .[ | ]. ;
+// → int flags = FLAG_A | FLAG_B | FLAG_C ;
+```
+
+**Regla:** Si `.{col.*}.` va seguido de `.[sep].`, genera una línea. Si no, genera N líneas.
+
+---
+
+### Foreach Multilínea
+
+Para iterar un **bloque completo** de varias líneas, se usa `EMIC:foreach` / `EMIC:endforeach`:
+
+```emic
+EMIC:define(sensores.temp, ADC_CH0)
+EMIC:define(sensores.hum, ADC_CH1)
+
+EMIC:foreach(sensores.*)
+    uint16_t read_.{*}.(void) {
+        return .{sensores.{*}}.;
+    }
+EMIC:endforeach
+```
+
+Genera:
+```c
+uint16_t read_temp(void) {
+    return ADC_CH0;
+}
+uint16_t read_hum(void) {
+    return ADC_CH1;
+}
+```
+
+**Variables del iterador:**
+- `.{*}.` — nombre de la key actual (como texto literal)
+- `{*}` — nombre de la key dentro de una expresión macro (ej: `.{sensores.{*}}.`)
+
+---
+
+### Foreach con 3 Niveles
+
+```emic
+EMIC:define(hw.uart.baud, 9600)
+EMIC:define(hw.uart.parity, none)
+
+EMIC:foreach(hw.uart.*)
+    config_uart(.{*}., .{hw.uart.{*}}.);
+EMIC:endforeach
+```
+
+Genera:
+```c
+config_uart(baud, 9600);
+config_uart(parity, none);
+```
+
+---
+
+### Foreach Anidado
+
+Para iterar colecciones de 3 niveles en ambas dimensiones, se anidan foreach con iteradores de nivel:
+
+| Nivel | Variable literal | Variable en expresión |
+|-------|-----------------|----------------------|
+| Externo | `.{*}.` | `{*}` |
+| Interno | `.{**}.` | `{**}` |
+| Tercer nivel | `.{***}.` | `{***}` |
+
+```emic
+EMIC:define(hw.uart.baud, 9600)
+EMIC:define(hw.uart.parity, none)
+EMIC:define(hw.spi.clock, 1000000)
+EMIC:define(hw.spi.mode, 0)
+
+EMIC:foreach(hw.*)
+    // Periferico: .{*}.
+    EMIC:foreach(hw.{*}.*)
+        set_param(".{*}.", ".{**}.", .{hw.{*}.{**}}.);
+    EMIC:endforeach
+EMIC:endforeach
+```
+
+Genera:
+```c
+// Periferico: uart
+set_param("uart", "baud", 9600);
+set_param("uart", "parity", none);
+// Periferico: spi
+set_param("spi", "clock", 1000000);
+set_param("spi", "mode", 0);
+```
+
+Al expandir el foreach externo, los iteradores internos se "promueven": `{**}` pasa a ser `{*}` para el foreach hijo.
+
+---
+
+### Comparación: ¿Cuándo Usar Cada Forma?
+
+| Necesidad | Mecanismo | Ejemplo |
+|-----------|-----------|---------|
+| Una línea por key | `.{col.*}.` inline | `val = .{canales.*}.;` |
+| Una sola línea con todos | `.{col.*}. .[sep].` join | `enum { .{canales.*}. .[, ]. };` |
+| Bloque multilínea por key | `EMIC:foreach` | Funciones, includes, bloques C |
+| Iteración anidada | `foreach` + `{**}` | Recorrer 2 dimensiones |
 
 ---
 
@@ -1328,7 +1514,7 @@ EMIC:setInput(DEV:api_index.emic)
 1. **Variables Avanzadas:**
    - Variables de sistema: `.{system.*}.`
    - Variables anidadas: `.{prefix}..{name}.`
-   - Namespacing con puntos
+   - Namespacing con puntos (2 y 3 niveles)
 
 2. **Ámbito (Scope):**
    - Variables globales: Disponibles siempre
@@ -1340,13 +1526,20 @@ EMIC:setInput(DEV:api_index.emic)
    - Múltiples sustituciones simultáneas
    - Concatenación de variables
 
-4. **Patrones Avanzados:**
+4. **Iteración y Expansión:**
+   - Inline con comodín: `.{col.*}.` → N líneas
+   - Join con separador: `.{col.*}. .[sep].` → 1 línea
+   - Foreach multilínea: `EMIC:foreach(col.*)` ... `EMIC:endforeach`
+   - Foreach anidado: iteradores `{*}`, `{**}`, `{***}`
+   - Comodín en 3 niveles: `col1.col2.*`, `col1.*.key`, `col1.*.*`
+
+5. **Patrones Avanzados:**
    - Multi-instanciación de componentes
    - Include guards para prevenir duplicados
    - Composición jerárquica
    - Configuración dinámica
 
-5. **Debugging:**
+6. **Debugging:**
    - Logging con `EMIC:setOutput`
    - Verificación de expansiones
    - Trace de inclusiones
@@ -1360,6 +1553,10 @@ EMIC:setInput(DEV:api_index.emic)
 | **Composición** | Dependencias | API → Driver → HAL → _hard |
 | **Configuración Dinámica** | Adaptabilidad | `EMIC:ifdef REV_1 ... EMIC:endif` |
 | **Variables Anidadas** | Nombres dinámicos | `.{prefix}..{name}..{suffix}.` |
+| **Inline Wildcard** | Expansión por key | `.{col.*}.` → N líneas |
+| **Join con Separador** | Lista en 1 línea | `.{col.*}. .[, ].` |
+| **Foreach** | Bloque por key | `EMIC:foreach(col.*)` ... `EMIC:endforeach` |
+| **Foreach Anidado** | 2 dimensiones | `{*}` externo, `{**}` interno |
 
 ### Casos de Uso Cubiertos
 
@@ -1367,6 +1564,8 @@ EMIC:setInput(DEV:api_index.emic)
 ✅ Configuración dinámica de pines según hardware revision
 ✅ Template de driver genérico para sensores
 ✅ Sistema de plugins dinámicos
+✅ Iteración automática sobre colecciones de periféricos
+✅ Generación de enums y listas con expansión join
 
 ### Próximo Capítulo
 

@@ -1618,7 +1618,7 @@ buffer[4] = 0; buffer[5] = 0; buffer[6] = 0; buffer[7] = 0;
 | XC16 Compiler | Compilador PIC 16-bit | https://www.microchip.com/xc16 |
 | XC32 Compiler | Compilador PIC 32-bit | https://www.microchip.com/xc32 |
 | EMIC-CLI | CLI tool EMIC | https://github.com/EMIC/emic-cli |
-| EMIC-Editor | Web IDE | https://editor.emic.io |
+| EMIC-Editor | Web IDE | https://emic.io |
 | VSCode Extension | Plugin VSCode | https://marketplace.visualstudio.com/emic |
 | PICkit 4 | Programmer/debugger | https://www.microchip.com/pickit4 |
 | ICD 4 | Debugger profesional | https://www.microchip.com/icd4 |

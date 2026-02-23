@@ -54,7 +54,7 @@
 | Herramienta | Plataforma | Versión | Download |
 |-------------|------------|---------|----------|
 | **EMIC-CLI** | Windows, Linux, macOS | v2.1.0 | [⬇️ Download](https://downloads.emic.io/cli) |
-| **EMIC-Editor** | Web (Chrome, Firefox, Edge) | Online | [🌐 editor.emic.io](https://editor.emic.io) |
+| **EMIC-Editor** | Web (Chrome, Firefox, Edge) | Online | [🌐 emic.io](https://emic.io) |
 | **VSCode Extension** | VSCode | v1.5.2 | [🔌 Marketplace](https://marketplace.visualstudio.com/items?itemName=EMIC.emic-vscode) |
 | **EMIC SDK** | All | v3.0.1 | [📦 GitHub Releases](https://github.com/EMIC-Electronics/emic-sdk/releases) |
 
@@ -805,7 +805,7 @@ Costo: ~$50 USD
 🔖 Marcadores Esenciales para Todo Desarrollador EMIC
 
 1. 📖 docs.emic.io/manual          (Este manual)
-2. 🌐 editor.emic.io                (EMIC Editor)
+2. 🌐 emic.io                (EMIC Editor)
 3. 💬 discord.gg/emic               (Comunidad)
 4. 🐙 github.com/EMIC-Electronics  (Código fuente)
 5. 📚 learn.emic.io                 (Tutoriales)
@@ -889,7 +889,7 @@ Y cuando lo termines, compártelo con nosotros:
 🌐 Links Rápidos (Guardar como favoritos!)
 
 Website:    https://emic.io
-Editor:     https://editor.emic.io
+Editor:     https://emic.io
 Docs:       https://docs.emic.io
 Discord:    https://discord.gg/emic
 GitHub:     https://github.com/EMIC-Electronics
