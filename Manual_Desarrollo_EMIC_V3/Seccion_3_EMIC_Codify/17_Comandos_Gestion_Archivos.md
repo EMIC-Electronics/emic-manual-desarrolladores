@@ -339,25 +339,59 @@ EMIC:copy(DEV:_templates/projects/mplabx > TARGET:)
 EMIC:copy(inc/.{pcb}..h > TARGET:inc/.{pcb}..h)
 ```
 
-### 4.4 Diferencia entre copy y setOutput+setInput
+### 4.4 Equivalencia entre copy y setOutput+setInput
 
-Ambas formas logran el mismo resultado:
+`EMIC:copy` es **azucar sintactica** para la combinacion `setOutput` / `setInput` / `restoreOutput`. Las siguientes dos formas son **exactamente equivalentes**:
 
-**Usando copy (recomendado para archivos simples):**
+**Forma compacta — `copy`:**
 ```c
 EMIC:copy(inc/led.h > TARGET:inc/led_.{name}..h, name=.{name}., pin=.{pin}.)
 ```
 
-**Usando setOutput + setInput (para más control):**
+**Forma expandida — `setOutput` + `setInput` + `restoreOutput`:**
 ```c
 EMIC:setOutput(TARGET:inc/led_.{name}..h)
     EMIC:setInput(inc/led.h, name=.{name}., pin=.{pin}.)
 EMIC:restoreOutput
 ```
 
-> **💡 Tip:** Usa `copy` cuando solo necesitas copiar y transformar un archivo. Usa `setOutput`+`setInput` cuando necesitas escribir contenido adicional o procesar múltiples archivos al mismo destino.
+### 4.5 Cuando usar cada forma
 
-### 4.5 Convenciones de Rutas de Destino
+**Usar `copy`** cuando el destino se compone de **un solo archivo de entrada** sin texto adicional. Es mas conciso y legible:
+
+```c
+// Un archivo de entrada, sin texto extra → usar copy
+EMIC:copy(inc/UART.h > TARGET:inc/UART1.h, port=1, baud=9600)
+EMIC:copy(src/UART.c > TARGET:UART1.c, port=1, baud=9600)
+```
+
+**Usar `setOutput` / `restoreOutput`** cuando se necesita:
+- **Multiples archivos de entrada** al mismo destino
+- **Texto literal** intercalado entre los archivos
+
+```c
+// Multiples archivos de entrada + texto literal → usar setOutput/restoreOutput
+EMIC:setOutput(TARGET:inc/system_config.h)
+    #ifndef SYSTEM_CONFIG_H
+    #define SYSTEM_CONFIG_H
+
+    // Archivo 1: configuracion del clock
+    EMIC:setInput(inc/clock_config.h, freq=.{freq}.)
+
+    // Archivo 2: configuracion de pines
+    EMIC:setInput(inc/pin_config.h, pcb=.{pcb}.)
+
+    // Texto literal que no viene de ningun archivo
+    #define BOARD_NAME ".{pcb}."
+    #define FIRMWARE_VERSION ".{version}."
+
+    #endif
+EMIC:restoreOutput
+```
+
+> **Regla simple:** Si hay un solo `setInput` entre `setOutput` y `restoreOutput`, y no hay texto literal alrededor, reemplazar por `EMIC:copy`.
+
+### 4.6 Convenciones de Rutas de Destino
 
 ```c
 // ✅ CORRECTO: Headers van a inc/
@@ -370,7 +404,7 @@ EMIC:copy(src/Digital.c > TARGET:Digital.c)
 EMIC:copy(src/Digital.c > TARGET:src/Digital.c)
 ```
 
-### 4.6 Propagación de Parámetros
+### 4.7 Propagación de Parámetros
 
 Los parámetros pasados en `copy` están disponibles en el archivo procesado:
 
