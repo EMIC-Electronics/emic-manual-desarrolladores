@@ -394,7 +394,7 @@ El archivo `EMIC-TABS/Resources` generado tiene el siguiente formato:
     <emic-driver-container name="TIMER" icon="cable">
         <!-- Funciones del driver TIMER -->
         <emic-program-function
-            driver="TIMER"
+            driver="TIME"
             name="setTime1"
             type="void"
             brief="Time in milliseconds for the event to be generated."
@@ -407,7 +407,7 @@ El archivo `EMIC-TABS/Resources` generado tiene el siguiente formato:
 
         <!-- Eventos del driver TIMER -->
         <emic-program-event
-            driver="TIMER"
+            driver="TIME"
             name="etOut1"
             type="void"
             brief="When the time configured in timer1 expires."

@@ -89,7 +89,7 @@ EMIC:tag(driverName = LEDs)
 // Todos los recursos aparecerán bajo "LEDs" en el Editor
 
 // timer_api.emic
-EMIC:tag(driverName = TIMER)
+EMIC:tag(driverName = TIME)
 // Recursos agrupados bajo "TIMER"
 
 // rs232.emic

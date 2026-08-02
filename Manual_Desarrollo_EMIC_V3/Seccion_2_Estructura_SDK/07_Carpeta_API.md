@@ -356,7 +356,7 @@ EMIC:setInput(DEV:_api/Indicators/LEDs/led.emic,name=led2,pin=B3_Pin)
 **Archivo: timer_api.emic**
 
 ```emic
-EMIC:tag(driverName = TIMER)
+EMIC:tag(driverName = TIME)
 
 /**
 * @fn void setTime.{name}.(uint16_t time,char mode);

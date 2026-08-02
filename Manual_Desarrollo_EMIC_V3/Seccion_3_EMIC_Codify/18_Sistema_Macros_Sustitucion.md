@@ -682,7 +682,7 @@ EMIC:restoreOutput
 Del archivo `_api/Timers/timer_api.emic`:
 
 ```c
-EMIC:tag(driverName = TIMER)
+EMIC:tag(driverName = TIME)
 
 /**
 * @fn void setTime.{name}.(uint16_t time, char mode);
